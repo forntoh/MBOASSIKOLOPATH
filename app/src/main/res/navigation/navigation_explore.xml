@@ -69,14 +69,19 @@
         android:name="com.mboasikolopath.ui.main.home.explore.sector.SectorFragment"
         android:label="@string/sector"
         tools:layout="@layout/fragment_sector">
-        <argument
-            android:name="color"
-            app:argType="integer" />
         <action
             android:id="@+id/action_sectorFragment_self"
             app:destination="@id/sectorFragment"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_sectorFragment_to_seriesFragment"
+            app:destination="@id/seriesFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+        <argument
+            android:name="color"
+            app:argType="integer" />
         <argument
             android:name="level"
             android:defaultValue="0"
@@ -87,11 +92,10 @@
         <argument
             android:name="title"
             app:argType="string" />
-        <action
-            android:id="@+id/action_sectorFragment_to_seriesFragment"
-            app:destination="@id/seriesFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
+        <argument
+            android:name="after"
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/specialityFragments"

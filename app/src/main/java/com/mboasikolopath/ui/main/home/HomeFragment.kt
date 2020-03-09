@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.mboasikolopath.R
 import com.mboasikolopath.internal.view.NewsItem
 import com.mboasikolopath.ui.base.ScopedFragment
@@ -67,11 +68,20 @@ class HomeFragment : ScopedFragment(), View.OnClickListener {
         btn_jobs.setOnClickListener(this@HomeFragment)
         btn_sector.setOnClickListener(this@HomeFragment)
         btn_series.setOnClickListener(this@HomeFragment)
+
+        button_after_primary.setOnClickListener(this@HomeFragment)
+        button_after_secondary.setOnClickListener(this@HomeFragment)
+        //button_after_high.setOnClickListener(this@HomeFragment)
     }
 
     override fun onClick(v: View?) {
-        val color = ((v as CardView).cardBackgroundColor).defaultColor
-        when (v.id) {
+        var color = 0
+        if (v is CardView)
+            color = (v.cardBackgroundColor).defaultColor
+        else if (v is MaterialButton)
+            color = (v.strokeColor).defaultColor
+
+        when (v?.id) {
             R.id.btn_schools -> NavHostFragment.findNavController(this).navigate(
                 MainFragmentDirections.actionMainFragmentToSchoolsFragment(color)
             )
@@ -81,6 +91,16 @@ class HomeFragment : ScopedFragment(), View.OnClickListener {
             R.id.btn_sector -> NavHostFragment.findNavController(this).navigate(
                 MainFragmentDirections.actionMainFragmentToSectorFragment(color, 0, 0, "")
             )
+
+            R.id.button_after_primary -> NavHostFragment.findNavController(this).navigate(
+                MainFragmentDirections.actionMainFragmentToSectorFragment(color, 0, 0, (v as MaterialButton).text.toString(), v.id)
+            )
+            R.id.button_after_secondary -> NavHostFragment.findNavController(this).navigate(
+                MainFragmentDirections.actionMainFragmentToSectorFragment(color, 0, 0, (v as MaterialButton).text.toString(), v.id)
+            )
+            /*R.id.button_after_high -> NavHostFragment.findNavController(this).navigate(
+
+            )*/
         }
         (activity as MainActivity).hideTabHost(true)
     }
@@ -97,6 +117,7 @@ class HomeFragment : ScopedFragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         launch { viewModelSetup.populateDatabase() }
+        (activity as MainActivity).setToolbarSubTitle("")
     }
 
 }

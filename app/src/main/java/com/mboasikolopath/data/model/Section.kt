@@ -19,6 +19,7 @@ data class Section(
     @PrimaryKey
     @SerializedName("sectionid") var SectionID: Int,
     @SerializedName("description") var Description: String,
+    @SerializedName("longdescription") var LongDescription: String = "",
 
     @SerializedName("educationid") var EducationID: Int
 )

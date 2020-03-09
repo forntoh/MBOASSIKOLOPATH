@@ -83,10 +83,10 @@ class App : MultiDexApplication(), KodeinAware {
                 //bind<LocationRepo>() with singleton { LocationRepoImplTest() }
                 bind<CertificateRepo>() with singleton { CertificateRepoImplTest() }
                 bind<DeboucheRepo>() with singleton { DeboucheRepoImplTest() }
-                bind<EducationRepo>() with singleton { EducationRepoImplTest() }
+                bind<EducationRepo>() with singleton { EducationRepoImplTest(instance()) }
                 bind<JobRepo>() with singleton { JobRepoImplTest() }
                 bind<SchoolRepo>() with singleton { SchoolRepoImplTest() }
-                bind<SectionRepo>() with singleton { SectionRepoImplTest() }
+                bind<SectionRepo>() with singleton { SectionRepoImplTest(instance()) }
                 bind<SeriesRepo>() with singleton { SeriesRepoImplTest() }
                 bind<SpecialityRepo>() with singleton { SpecialityRepoImplTest() }
                 bind<SubjectTaughtRepo>() with singleton { SubjectTaughtRepoImplTest() }

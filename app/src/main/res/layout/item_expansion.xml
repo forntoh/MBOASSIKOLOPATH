@@ -13,7 +13,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Specialite 1er cycle"
+        android:text="@string/series_first_cycle"
         android:textSize="15sp" />
 
     <com.google.android.material.chip.ChipGroup
@@ -30,7 +30,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Specialite 2eme cycle"
+        android:text="@string/series_second_cycle"
         android:textSize="15sp" />
 
     <com.google.android.material.chip.ChipGroup

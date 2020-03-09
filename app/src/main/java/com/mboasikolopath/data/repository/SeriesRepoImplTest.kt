@@ -35,4 +35,7 @@ class SeriesRepoImplTest : SeriesRepo() {
 
     override suspend fun findSeriesOfSpeciality(id: Int) =
         loadAll().filter { it.SpecialityID == id }
+
+    override suspend fun findSeriesOfSpecialityOfCycle(id: Int, cycle: Int): List<Series> =
+        loadAll().filter { it.SpecialityID == id && it.Cycle == cycle }
 }

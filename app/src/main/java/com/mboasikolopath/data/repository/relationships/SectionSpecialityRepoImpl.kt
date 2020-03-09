@@ -1,14 +1,14 @@
 package com.mboasikolopath.data.repository.relationships
 
 import com.mboasikolopath.data.db.relationships.SectionSpecialityDao
+import com.mboasikolopath.data.model.Speciality
 import com.mboasikolopath.data.model.relationships.SectionSpeciality
+import com.mboasikolopath.data.model.relationships.SectionSpecialityPair
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class SectionSpecialityRepoImpl(
@@ -35,12 +35,12 @@ class SectionSpecialityRepoImpl(
         }
     }
 
-    override suspend fun findSectionAndSpecialityPairs() = withContext(Dispatchers.IO) {
+    override suspend fun findSectionAndSpecialityPairs(): List<SectionSpecialityPair> {
         initSectionSpecialityData()
-        return@withContext sectionSpecialityDao.findSectionAndSpecialityPairs()
+        return sectionSpecialityDao.findSectionAndSpecialityPairs()
     }
 
-    override suspend fun findSpecialitiesBySectionID(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext sectionSpecialityDao.findSpecialitiesBySectionID(id)
+    override suspend fun findSpecialitiesBySectionID(id: Int): List<Speciality> {
+        return sectionSpecialityDao.findSpecialitiesBySectionID(id)
     }
 }

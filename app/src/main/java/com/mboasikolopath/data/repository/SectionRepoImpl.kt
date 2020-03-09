@@ -6,9 +6,7 @@ import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class SectionRepoImpl(
@@ -35,16 +33,16 @@ class SectionRepoImpl(
         }
     }
 
-    override suspend fun loadAll() = withContext(Dispatchers.IO) {
+    override suspend fun loadAll(): List<Section> {
         initSectionsData()
-        return@withContext sectionDao.loadAll()
+        return sectionDao.loadAll()
     }
 
-    override suspend fun findBySectionID(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext sectionDao.findBySectionID(id)
+    override suspend fun findBySectionID(id: Int): Section {
+        return sectionDao.findBySectionID(id)
     }
 
-    override suspend fun findSectionsOfEducation(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext sectionDao.findSectionsOfEducation(id)
+    override suspend fun findSectionsOfEducation(id: Int): List<Section> {
+        return sectionDao.findSectionsOfEducation(id)
     }
 }

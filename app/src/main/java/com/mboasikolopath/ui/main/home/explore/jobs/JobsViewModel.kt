@@ -34,7 +34,7 @@ class JobsViewModel(
                             it.SpecialityID
                         ).Description
                     }
-                },
+                },"",
                 jobsAndItsSeries.series.filter { it.Cycle == 1 }.map { it.SeriesID },
                 jobsAndItsSeries.series.filter { it.Cycle == 2 }.map { it.SeriesID }
             )
@@ -55,7 +55,7 @@ class JobsViewModel(
                                 it.SpecialityID
                             ).Description
                         }
-                    },
+                    },"",
                     series.filter { it.Cycle == 1 }.map { it.SeriesID },
                     series.filter { it.Cycle == 2 }.map { it.SeriesID }
                 )

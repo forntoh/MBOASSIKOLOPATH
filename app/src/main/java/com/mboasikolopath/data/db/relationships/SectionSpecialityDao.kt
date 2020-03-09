@@ -14,7 +14,7 @@ interface SectionSpecialityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg SectionSpecialities: SectionSpeciality)
 
-    @Query("SELECT Section.SectionID as Section_SectionID, Section.Description as Section_Description, Section.EducationID as Section_EducationID, Speciality.* FROM Section LEFT OUTER JOIN SectionSpeciality on SectionSpeciality.SectionID = Section.SectionID INNER JOIN Speciality on SectionSpeciality.SpecialityID = Speciality.SpecialityID")
+    @Query("SELECT Section.SectionID as Section_SectionID, Section.Description as Section_Description, Section.LongDescription as Section_LongDescription, Section.EducationID as Section_EducationID, Speciality.* FROM Section LEFT OUTER JOIN SectionSpeciality on SectionSpeciality.SectionID = Section.SectionID INNER JOIN Speciality on SectionSpeciality.SpecialityID = Speciality.SpecialityID")
     fun findSectionAndSpecialityPairs(): List<SectionSpecialityPair>
 
     @Query("SELECT Speciality.* FROM Section LEFT OUTER JOIN SectionSpeciality on SectionSpeciality.SectionID = Section.SectionID LEFT OUTER JOIN Speciality on SectionSpeciality.SpecialityID = Speciality.SpecialityID WHERE SectionSpeciality.SectionID = :id")

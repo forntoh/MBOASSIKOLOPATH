@@ -26,6 +26,7 @@ data class GenericListItem(
     var _id: String = "",
     var title: String? = "",
     var subTitle: String? = "",
+    var longDescription: String? = "",
     var firstChipGroup: List<String> = emptyList(),
     var secondChipGroup: List<String> = emptyList()
 ) : Item() {

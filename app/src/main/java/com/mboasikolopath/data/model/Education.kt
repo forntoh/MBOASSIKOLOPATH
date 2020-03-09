@@ -8,5 +8,6 @@ import com.google.gson.annotations.SerializedName
 data class Education(
     @PrimaryKey
     @SerializedName("educationid") var EducationID: Int,
-    @SerializedName("description") var Description: String
+    @SerializedName("description") var Description: String,
+    @SerializedName("longdescription") var LongDescription: String = ""
 )

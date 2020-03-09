@@ -44,4 +44,9 @@
     <string name="series">Spécialité</string>
     <string name="sectors">Les secteurs</string>
     <string name="sector">Secteur</string>
+    <string name="after_primary">Après l’école primaire\n(CEP/FSLC)</string>
+    <string name="after_secondary">Après le premier cycle du secondaire général et technique\n(BEPC/GCE O-Level/CAP)</string>
+    <string name="after_high">Apres le deuxieme cycle du secondaire general et technique\n(GCE A-Level/BAC)</string>
+    <string name="series_first_cycle">Filières 1er cycle</string>
+    <string name="series_second_cycle">Filières  2eme cycle</string>
 </resources>

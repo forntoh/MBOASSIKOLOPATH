@@ -9,4 +9,6 @@ abstract class SeriesRepo: BaseRepository() {
     abstract suspend fun findBySeriesID(id: String): Series
 
     abstract suspend fun findSeriesOfSpeciality(id: Int): List<Series>
+
+    abstract suspend fun findSeriesOfSpecialityOfCycle(id: Int, cycle: Int): List<Series>
 }

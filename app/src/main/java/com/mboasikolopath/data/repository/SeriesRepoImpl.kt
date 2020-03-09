@@ -6,9 +6,7 @@ import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class SeriesRepoImpl(
@@ -35,16 +33,20 @@ class SeriesRepoImpl(
         }
     }
 
-    override suspend fun loadAll() = withContext(Dispatchers.IO) {
+    override suspend fun loadAll(): List<Series> {
         initSeriesData()
-        return@withContext seriesDao.loadAll()
+        return seriesDao.loadAll()
     }
 
-    override suspend fun findBySeriesID(id: String) = withContext(Dispatchers.IO) {
-        return@withContext seriesDao.findBySeriesID(id)
+    override suspend fun findBySeriesID(id: String): Series {
+        return seriesDao.findBySeriesID(id)
     }
 
-    override suspend fun findSeriesOfSpeciality(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext seriesDao.findSeriesOfSpeciality(id)
+    override suspend fun findSeriesOfSpeciality(id: Int): List<Series> {
+        return seriesDao.findSeriesOfSpeciality(id)
+    }
+
+    override suspend fun findSeriesOfSpecialityOfCycle(id: Int, cycle: Int): List<Series> {
+        return seriesDao.findSeriesOfSpecialityOfCycle(id, cycle)
     }
 }

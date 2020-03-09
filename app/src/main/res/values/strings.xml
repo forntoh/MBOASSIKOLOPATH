@@ -60,4 +60,11 @@
     <string name="signed_in_with_google">signed in with google</string>
     <string name="tip_tap_on_any_item_to_modify_it">Tip: Tap on any item to modify it</string>
 
+    <string name="after_primary">After primary school\n(CEP/FSLC)</string>
+    <string name="after_secondary">After the first cycle of general and technical secondary\n(BEPC/GCE O-Level/CAP)</string>
+    <string name="after_high">After the second cycle of secondary general and technical secondary\n(GCE A-Level/BAC)</string>
+    <string name="series_first_cycle">1st cycle series</string>
+    <string name="series_second_cycle">2nd cycle series</string>
+    <string name="lorem" translatable="false">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+
 </resources>

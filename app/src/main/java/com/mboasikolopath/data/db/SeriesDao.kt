@@ -20,4 +20,7 @@ interface SeriesDao {
 
     @Query("SELECT * FROM Series WHERE SpecialityID LIKE :id")
     fun findSeriesOfSpeciality(id: Int): List<Series>
+
+    @Query("SELECT * FROM Series WHERE SpecialityID LIKE :id AND Cycle LIKE :cycle")
+    fun findSeriesOfSpecialityOfCycle(id: Int, cycle: Int): List<Series>
 }

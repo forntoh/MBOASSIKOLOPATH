@@ -29,14 +29,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="264dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@string/explore"
             android:textAppearance="@style/LargerText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/ll" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -51,14 +51,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btn_schools"
                 style="@style/ExploreButtons"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@color/main_color_red"
-                app:cardElevation="0dp">
+                android:stateListAnimator="@null"
+                app:cardBackgroundColor="@color/main_color_red">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                     android:textColor="@android:color/white" />
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -83,14 +83,14 @@
                 android:orientation="vertical">
 
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btn_jobs"
                     style="@style/ExploreButtons"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:stateListAnimator="@null"
                     app:cardBackgroundColor="@color/main_color_green"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="0dp">
+                    app:cardCornerRadius="5dp">
 
                     <TextView
                         android:id="@+id/textView16"
@@ -108,7 +108,7 @@
                         android:textAllCaps="false"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                         android:textColor="@android:color/white" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -116,13 +116,13 @@
                     android:layout_weight="1"
                     tools:ignore="NestedWeights">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/btn_sector"
                         style="@style/ExploreButtons"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        app:cardBackgroundColor="@color/main_color_orange"
-                        app:cardElevation="0dp">
+                        android:stateListAnimator="@null"
+                        app:cardBackgroundColor="@color/main_color_orange">
 
                         <TextView
                             android:id="@+id/textView17"
@@ -139,15 +139,15 @@
                             android:textAllCaps="false"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                             android:textColor="@android:color/white" />
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/btn_series"
                         style="@style/ExploreButtons"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        app:cardBackgroundColor="@color/main_color_yellow"
-                        app:cardElevation="0dp">
+                        android:stateListAnimator="@null"
+                        app:cardBackgroundColor="@color/main_color_yellow">
 
                         <TextView
                             android:id="@+id/textView18"
@@ -164,7 +164,7 @@
                             android:textAllCaps="false"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                             android:textColor="@android:color/white" />
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
 
             </LinearLayout>
@@ -193,6 +193,65 @@
             tools:layoutManager="GridLayoutManager"
             tools:listitem="@layout/item_news"
             tools:spanCount="2" />
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_after_primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:stateListAnimator="@null"
+                android:text="@string/after_primary"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                app:backgroundTint="@android:color/white"
+                app:cornerRadius="8dp"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_after_secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:stateListAnimator="@null"
+                android:text="@string/after_secondary"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                app:backgroundTint="@android:color/white"
+                app:cornerRadius="8dp"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp" />
+
+            <!--<com.google.android.material.button.MaterialButton
+                android:id="@+id/button_after_high"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:stateListAnimator="@null"
+                android:text="@string/after_high"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                app:backgroundTint="@android:color/white"
+                app:cornerRadius="8dp"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="2dp" />-->
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

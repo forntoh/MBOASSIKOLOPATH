@@ -60,25 +60,36 @@ class SectorFragment : ScopedFragment() {
 
         when (args.level) {
             0 -> {
-                sectors = viewModel.sectors.await()
+                sectors = viewModel.sectors()
                 mainSection.update(sectors)
             }
 
             1 -> {
-                viewModel.education = args.parentId
-                sectorOptions = viewModel.sectorOptions.await()!!
+                sectorOptions = viewModel.sectorOptions(args.parentId)
+                long_description.visibility = View.VISIBLE
+                long_description.text = sectorOptions.first().longDescription
                 mainSection.update(sectorOptions)
                 (activity as MainActivity).setToolbarTitle(args.title)
             }
 
             2 -> {
-                viewModel.sector = args.parentId
-                optionSeries = viewModel.optionSeries.await()!!
+                optionSeries = when(args.after) {
+                    R.id.button_after_primary -> viewModel.optionSeries(args.parentId, 1)
+                    R.id.button_after_secondary -> viewModel.optionSeries(args.parentId, 2)
+                    else -> viewModel.optionSeries(args.parentId)
+                }
+                long_description.visibility = View.VISIBLE
+                long_description.text = optionSeries.first().longDescription
                 mainSection.update(optionSeries)
                 (activity as MainActivity).setToolbarTitle(args.title)
             }
         }
 
+        when(args.after) {
+            R.id.button_after_primary -> (activity as MainActivity).setToolbarSubTitle(getString(R.string.after_primary))
+            R.id.button_after_secondary -> (activity as MainActivity).setToolbarSubTitle(getString(R.string.after_secondary))
+            else -> (activity as MainActivity).setToolbarSubTitle("")
+        }
     }
 
     private var sectors: List<GenericListItem> = emptyList()
@@ -95,7 +106,7 @@ class SectorFragment : ScopedFragment() {
                     mainSection.notifyChanged()
                 }
                 else -> NavHostFragment.findNavController(this).navigate(
-                    SectorFragmentDirections.actionSectorFragmentSelf(args.color, args.level + 1, item._id.toInt(), item.title!!)
+                    SectorFragmentDirections.actionSectorFragmentSelf(args.color, args.level + 1, item._id.toInt(), item.title!!, args.after)
                 )
             }
         }

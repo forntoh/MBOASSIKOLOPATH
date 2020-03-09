@@ -56,6 +56,9 @@ class MainActivity : AppCompatActivity() {
     fun setToolbarTitle(title: String) {
         toolbar.title = title
     }
+    fun setToolbarSubTitle(title: String) {
+        toolbar.subtitle = title
+    }
 
     override fun onSupportNavigateUp(): Boolean = NavigationUI.navigateUp(navController, null)
 
