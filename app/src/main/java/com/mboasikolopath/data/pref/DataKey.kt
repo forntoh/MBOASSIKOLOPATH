@@ -1,0 +1,41 @@
+package com.mboasikolopath.data.pref
+
+enum class DataKey {
+    CERTIFICATES,
+
+    SCHOOLS,
+
+    SECTIONS,
+
+    SERIES,
+
+    SPECIALITIES,
+
+    SUBJECTS_TAUGHT,
+
+    USER,
+
+    JOBS,
+
+    EDUCATIONS,
+
+    DEBOUCHES,
+
+    CERTIFICATE_DEBOUCHES,
+
+    SECTION_SPECIALITIES,
+
+    SERIES_JOBS,
+
+    SERIES_SCHOOLS,
+
+    SERIES_SUBJECTS_TAUGHT,
+
+    LOCALITIES,
+
+    ARRONDISSEMENTS,
+
+    DEPARTEMENTS,
+
+    REGIONS
+}

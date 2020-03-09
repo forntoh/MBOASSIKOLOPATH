@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="icons">
+        <item>@drawable/ic_gender_male_female</item>
+        <item>@drawable/ic_calendar</item>
+        <item>@drawable/ic_location</item>
+        <item>@drawable/ic_certificate</item>
+        <item>@drawable/ic_fire</item>
+        <item>@drawable/ic_class</item>
+    </array>
+
+    <array name="contact_icons">
+        <item>@drawable/ic_phone</item>
+        <item>@drawable/ic_email</item>
+        <item>@drawable/ic_web</item>
+        <item>@drawable/ic_face_agent</item>
+    </array>
+
+    <array name="switch_gender_tabs">
+        <item>Male</item>
+        <item>Female</item>
+    </array>
+</resources>

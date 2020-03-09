@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "819196506744",
+    "firebase_url": "https://mboas-sikolo-path.firebaseio.com",
+    "project_id": "mboas-sikolo-path",
+    "storage_bucket": "mboas-sikolo-path.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819196506744:android:04beeae38ad0f025",
+        "android_client_info": {
+          "package_name": "com.mboasikolopath"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819196506744-atd318f6sa1grujoof8hgvab7i57vn3l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mboasikolopath",
+            "certificate_hash": "b895d6c30affee316d8bef5633dfa518acb7bf68"
+          }
+        },
+        {
+          "client_id": "819196506744-4oor9uasv24ujkqbl67fspqqa439cuji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGxNdbjOFm5Ff0vF7GaMk6WEcx3-2cYtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819196506744-4oor9uasv24ujkqbl67fspqqa439cuji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

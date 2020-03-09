@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/schoolsFragment"
+        android:name="com.mboasikolopath.ui.main.home.explore.schools.SchoolsFragment"
+        android:label="Schools"
+        tools:layout="@layout/fragment_schools">
+        <argument
+            android:name="color"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_schoolsFragment_to_schoolFragment"
+            app:destination="@id/schoolFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jobsFragment"
+        android:name="com.mboasikolopath.ui.main.home.explore.jobs.JobsFragment"
+        android:label="Jobs"
+        tools:layout="@layout/fragment_jobs">
+        <argument
+            android:name="color"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_jobsFragment_to_seriesFragment"
+            app:destination="@id/seriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.mboasikolopath.ui.main.MainFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_schoolsFragment"
+            app:destination="@id/schoolsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_jobsFragment"
+            app:destination="@id/jobsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_sectorFragment"
+            app:destination="@id/sectorFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_specialityFragments"
+            app:destination="@id/specialityFragments" />
+        <action
+            android:id="@+id/action_mainFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sectorFragment"
+        android:name="com.mboasikolopath.ui.main.home.explore.sector.SectorFragment"
+        android:label="Sector"
+        tools:layout="@layout/fragment_sector">
+        <argument
+            android:name="color"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_sectorFragment_self"
+            app:destination="@id/sectorFragment" />
+        <argument
+            android:name="level"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="parentId"
+            app:argType="integer" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_sectorFragment_to_seriesFragment"
+            app:destination="@id/seriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/specialityFragments"
+        android:name="com.mboasikolopath.ui.main.home.explore.speciality.SpecialityFragment"
+        android:label="speciality_fragment"
+        tools:layout="@layout/fragment_speciality">
+        <argument
+            android:name="color"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/schoolFragment"
+        android:name="com.mboasikolopath.ui.main.home.explore.schools.school.SchoolFragment"
+        android:label="School"
+        tools:layout="@layout/fragment_school">
+        <argument
+            android:name="id"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_schoolFragment_to_seriesFragment"
+            app:destination="@id/seriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/seriesFragment"
+        android:name="com.mboasikolopath.ui.main.home.explore.series.SeriesFragment"
+        android:label="Series"
+        tools:layout="@layout/fragment_series">
+        <argument
+            android:name="series"
+            app:argType="string" />
+        <argument
+            android:name="cycle"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.mboasikolopath.ui.main.home.explore.news.NewsFragment"
+        android:label="News"
+        tools:layout="@layout/fragment_news">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
+</navigation>
