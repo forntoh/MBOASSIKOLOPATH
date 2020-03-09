@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,7 +45,7 @@ class JobsFragment : ScopedFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(JobsViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(JobsViewModel::class.java)
         buildUI()
     }
 
@@ -81,9 +81,6 @@ class JobsFragment : ScopedFragment() {
 
     private val onItemClickListener = OnItemClickListener { item, _ ->
         if (item is GenericListItem) {
-            //val fragment = NewsDetailFragment().apply { arguments = Bundle().apply { putLong("news", item.key) } }
-            //(context as CategoryActivity).loadFragment(fragment).addToBackStack(null)
-
             jobs.find { item == it }!!.toExpand = !item.toExpand
             jobsSection.notifyChanged()
         }

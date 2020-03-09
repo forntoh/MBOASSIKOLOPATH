@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cycle"
+                android:text="@string/cycle"
                 android:textAlignment="center"
                 android:textColor="@color/main_color_yellow"
                 android:textStyle="bold" />
@@ -88,7 +88,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Diplome de sortie."
+                android:text="@string/exit_diploma"
                 android:textColor="@color/text_color_orange" />
 
             <TextView
@@ -123,7 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Access conditions"
+                android:text="@string/access_conditions"
                 android:textAppearance="@style/LargeText"
                 android:textColor="@android:color/white" />
 
@@ -153,7 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Accéder à"
+                android:text="@string/get_to"
                 android:textAppearance="@style/LargeText"
                 android:textColor="@color/text_dark" />
 
@@ -185,7 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Subjects taught"
+                android:text="@string/subjects_taught"
                 android:textAppearance="@style/LargeText"
                 android:textColor="@color/text_dark" />
 
@@ -219,7 +219,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Skills obtained"
+                android:text="@string/skills_obtained"
                 android:textAppearance="@style/LargeText"
                 android:textColor="@color/text_dark" />
 
@@ -251,7 +251,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Job opportunities"
+                android:text="@string/job_opportunities"
                 android:textAppearance="@style/LargeText"
                 android:textColor="@color/text_dark" />
 
@@ -283,7 +283,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sectors"
+                android:text="@string/sectors"
                 android:textAppearance="@style/LargeText"
                 android:textColor="@color/text_dark" />
 
@@ -315,7 +315,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:text="Related Schools"
+                android:text="@string/related_schools"
                 android:textAppearance="@style/LargeText"
                 android:textColor="@color/text_dark" />
 

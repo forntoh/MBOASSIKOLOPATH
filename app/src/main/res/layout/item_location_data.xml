@@ -19,7 +19,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:text="Region" />
+            android:text="@string/region" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_value"

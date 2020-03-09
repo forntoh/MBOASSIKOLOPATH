@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,7 +40,7 @@ class SchoolFragment : ScopedFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModelFactory.schoolId = args.id.toInt()
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(SchoolViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SchoolViewModel::class.java)
         bindUI()
     }
 

@@ -46,8 +46,8 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
 
         auth.currentUser?.providerData?.forEach { userInfo ->
             when (userInfo.providerId) {
-                "facebook.com" -> tv_sign_in_method.text = "signed in with facebook"
-                "google.com" -> tv_sign_in_method.text = "signed in with google"
+                "facebook.com" -> tv_sign_in_method.text = getString(R.string.signed_in_with_facebook)
+                "google.com" -> tv_sign_in_method.text = getString(R.string.signed_in_with_google)
             }
             userInfo.photoUrl?.let {
                 Glide.with(context!!).load(it).into(photoIv)

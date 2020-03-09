@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mboa\'s Sikolo Path</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="search_hint">Chercher</string>
+    <string name="search_hint_jobs">Recherche d\'emplois</string>
+    <string name="search_hint_schools">Rechercher des écoles</string>
+    <string name="search_hint_specialities">Recherche de spécialités</string>
+    <string name="state_empty">Il n\'y a pas d\'articles</string>
+    <string name="state_loading">Chargement…</string>
+    <string name="news">Actualités</string>
+    <string name="about">À propos</string>
+    <string name="school">École</string>
+    <string name="explore">Explorer</string>
+    <string name="schools">Écoles</string>
+    <string name="division">Departement</string>
+    <string name="localities">Localités</string>
+    <string name="sub_division">Arrondissement</string>
+    <string name="my_orientation">Mon orientation</string>
+    <string name="get_to">Accéder à</string>
+    <string name="exit_diploma">Diplôme de sortie</string>
+    <string name="skills_obtained">Compétences acquises</string>
+    <string name="subjects_taught">Matières enseignées</string>
+    <string name="related_schools">Écoles connexes</string>
+    <string name="job_opportunities">Opportunités d\'emploi</string>
+    <string name="access_conditions">Conditions d\'accès</string>
+    <string name="your_name">Votre nom</string>
+    <string name="is_it_okay">Est-ce correct?</string>
+    <string name="when_were_you_born">Quand es-tu né?</string>
+    <string name="what_is_your_gender">Quel est ton sexe?</string>
+    <string name="more_than_six_chars">Doit contenir plus de 6 caractères</string>
+    <string name="where_are_you_located">Où habitez-vous?</string>
+    <string name="how_should_we_call_you">Comment devrions-nous vous appeler?</string>
+    <string name="review_info">Veuillez examiner les informations que vous avez fournies</string>
+    <string name="welcome_message">Commencez avec votre application de conseiller pédagogique personnel</string>
+    <string name="continue_with_google">Continuez avec Google</string>
+    <string name="continue_with_facebook">Continuez avec Facebook</string>
+    <string name="date_of_birth">Date de naissance</string>
+    <string name="signed_in_with_facebook">connecté avec facebook</string>
+    <string name="signed_in_with_google">connecté avec google</string>
+    <string name="tip_tap_on_any_item_to_modify_it">Astuce: appuyez sur n\'importe quel élément pour le modifier</string>
+    <string name="setup_summary">Bonjour, mon nom est <b>%1$s</b>, je suis un <b>%2$s</b>, je suis né le <b>%3$s</b> ce qui me fait <b>%4$d</b> ans, j\'habite à <b>%5$s</b>.</string>
+    <string name="jobs">Emplois</string>
+    <string name="series">Spécialité</string>
+    <string name="sectors">Les secteurs</string>
+    <string name="sector">Secteur</string>
+</resources>

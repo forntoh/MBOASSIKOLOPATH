@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
 class AboutFragment : ScopedFragment() {
 
     private val simpleContactsSection = Section()
-    private val otherContactsSection = Section()
 
     private lateinit var viewModel: AboutViewModel
 

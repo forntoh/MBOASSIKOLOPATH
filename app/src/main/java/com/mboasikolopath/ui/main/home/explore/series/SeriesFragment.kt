@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +40,7 @@ class SeriesFragment : ScopedFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModelFactory.seriesID = args.series
         viewModelFactory.cycle = args.cycle
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(SeriesViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SeriesViewModel::class.java)
         bindUI()
     }
 

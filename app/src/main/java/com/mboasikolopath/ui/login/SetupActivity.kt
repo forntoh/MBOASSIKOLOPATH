@@ -99,12 +99,12 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
     private fun bindUI() {
         addSlide(
             SetupNameFragment.newInstance(
-                "How should we call you?",
+                getString(R.string.how_should_we_call_you),
                 with(TextInputLayout(this)) {
                     layoutParams = lp
                     addView(TextInputEditText(this@SetupActivity).apply {
                         inputType = InputType.TYPE_TEXT_VARIATION_PERSON_NAME
-                        hint = "Your name"
+                        hint = context.getString(R.string.your_name)
 
                         if (firebaseUser != null) {
                             this.isEnabled = false
@@ -112,7 +112,7 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
                         }
 
                         afterTextChanged {
-                            if (it.length < 6) this@with.error = "Must be more than 6 characters"
+                            if (it.length < 6) this@with.error = context.getString(R.string.more_than_six_chars)
                             else {
                                 this@with.error = ""
                                 user.Name = it.trim()
@@ -125,7 +125,7 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
 
         addSlide(
             SetupNameFragment.newInstance(
-                "What is your gender?",
+                getString(R.string.what_is_your_gender),
                 LayoutInflater.from(this).inflate(
                     R.layout.fragment_setup_personal_info,
                     container,
@@ -145,7 +145,7 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
 
         addSlide(
             SetupNameFragment.newInstance(
-                "When were you born?",
+                getString(R.string.when_were_you_born),
                 FloatingActionButton(this).apply {
                     setImageResource(R.drawable.ic_date)
                     setBackgroundColor(primaryColor)
@@ -154,7 +154,7 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
 
                     setOnClickListener {
                         MaterialDialog(context!!).show {
-                            title(null, "Date of birth")
+                            title(null, context.getString(R.string.date_of_birth))
                             datePicker(maxDate = Calendar.getInstance().apply {
                                 set(Calendar.YEAR, get(Calendar.YEAR) - 10)
                             }) { _, date ->
@@ -174,7 +174,7 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
         var arrondissements: List<Arrondissement> = emptyList()
         addSlide(
             SetupNameFragment.newInstance(
-                "Where are you located?",
+                getString(R.string.where_are_you_located),
                 FloatingActionButton(this).apply {
                     setImageResource(R.drawable.ic_location_on_black_24dp)
                     setBackgroundColor(primaryColor)
@@ -189,7 +189,7 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
                             var level = 0
 
                             MaterialDialog(context!!).show {
-                                title(null, "Region")
+                                title(null, context.getString(R.string.region))
                                 listItemsSingleChoice(items = regions.map { it.Name }) { dialog, index, _ ->
                                     // Invoked when the user selects an item
                                     level++
@@ -199,17 +199,17 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
                                             1 -> {
                                                 departements = viewModel.findDepartementsOfRegion(regions[index].RegionID)
                                                 dialog.updateListItemsSingleChoice(items = departements.map { it.Name })
-                                                title(null, "Departements")
+                                                title(null, context.getString(R.string.division))
                                             }
                                             2 -> {
                                                 arrondissements = viewModel.findArrondissementsOfDepartement(departements[index].DepartementID)
                                                 dialog.updateListItemsSingleChoice(items = arrondissements.map { it.Name })
-                                                title(null, "Arrondissements")
+                                                title(null, context.getString(R.string.sub_division))
                                             }
                                             3 -> {
                                                 localites = viewModel.findLocalitesOfArrondissement(arrondissements[index].ArrondissementID)
                                                 dialog.updateListItemsSingleChoice(items = localites.map { it.Name })
-                                                title(null, "Localites")
+                                                title(null, context.getString(R.string.localities))
                                             }
                                             else -> {
                                                 user.LocaliteID = localites[index].LocaliteID
@@ -232,7 +232,7 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
                 })
         )
 
-        addSlide(SetupNameFragment.newInstance("Is this okay?", summary))
+        addSlide(SetupNameFragment.newInstance(getString(R.string.is_it_okay), summary))
 
         selectedIndicatorColor = ContextCompat.getColor(this, R.color.colorPrimary)
         unselectedIndicatorColor = ContextCompat.getColor(this, R.color.colorPrimaryLight)
@@ -263,11 +263,14 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
     override fun onSlideChanged(oldFragment: Fragment?, newFragment: Fragment?) {
         super.onSlideChanged(oldFragment, newFragment)
         try {
-            summary.text = Html.fromHtml(
-                "Hi, my name is <b>${user.Name}</b>, I am a <b>${if (user.Gender == "M") "boy" else "girl"}</b>, I was born on <b>${user.Dob}</b> which makes me <b>${
-                abs(ChronoUnit.YEARS.between(LocalDate.now(), user.Dob!!.getLocalDate()))
-                }yrs</b>, I live in <b>${localites.find { it.LocaliteID == user.LocaliteID }?.Name}</b>."
-            )
+            summary.text = Html.fromHtml(getString(
+                R.string.setup_summary,
+                user.Name,
+                if (user.Gender == "M") "boy" else "girl",
+                user.Dob,
+                abs(ChronoUnit.YEARS.between(LocalDate.now(), user.Dob!!.getLocalDate())),
+                localites.find { it.LocaliteID == user.LocaliteID }?.Name
+        ))
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -277,7 +280,7 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
         super.onDonePressed(currentFragment)
 
         if (user.Name.isBlank() || user.Dob.isNullOrBlank() || user.LocaliteID < 0)
-            Toast.makeText(this, "Please review the information you provided", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.review_info), Toast.LENGTH_LONG).show()
         else launch {
             val loading = getLoadingDialog(this@SetupActivity)
             viewModel.signup(user)

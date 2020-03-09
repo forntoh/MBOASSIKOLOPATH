@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/schoolsFragment"
         android:name="com.mboasikolopath.ui.main.home.explore.schools.SchoolsFragment"
-        android:label="Schools"
+        android:label="@string/schools"
         tools:layout="@layout/fragment_schools">
         <argument
             android:name="color"
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/jobsFragment"
         android:name="com.mboasikolopath.ui.main.home.explore.jobs.JobsFragment"
-        android:label="Jobs"
+        android:label="@string/jobs"
         tools:layout="@layout/fragment_jobs">
         <argument
             android:name="color"
@@ -67,7 +67,7 @@
     <fragment
         android:id="@+id/sectorFragment"
         android:name="com.mboasikolopath.ui.main.home.explore.sector.SectorFragment"
-        android:label="Sector"
+        android:label="@string/sector"
         tools:layout="@layout/fragment_sector">
         <argument
             android:name="color"
@@ -96,7 +96,6 @@
     <fragment
         android:id="@+id/specialityFragments"
         android:name="com.mboasikolopath.ui.main.home.explore.speciality.SpecialityFragment"
-        android:label="speciality_fragment"
         tools:layout="@layout/fragment_speciality">
         <argument
             android:name="color"
@@ -105,7 +104,7 @@
     <fragment
         android:id="@+id/schoolFragment"
         android:name="com.mboasikolopath.ui.main.home.explore.schools.school.SchoolFragment"
-        android:label="School"
+        android:label="@string/school"
         tools:layout="@layout/fragment_school">
         <argument
             android:name="id"
@@ -119,7 +118,7 @@
     <fragment
         android:id="@+id/seriesFragment"
         android:name="com.mboasikolopath.ui.main.home.explore.series.SeriesFragment"
-        android:label="Series"
+        android:label="@string/series"
         tools:layout="@layout/fragment_series">
         <argument
             android:name="series"
@@ -131,7 +130,7 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.mboasikolopath.ui.main.home.explore.news.NewsFragment"
-        android:label="News"
+        android:label="@string/news"
         tools:layout="@layout/fragment_news">
         <argument
             android:name="newsId"

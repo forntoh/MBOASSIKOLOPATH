@@ -1,21 +1,63 @@
 <resources>
     <string name="app_name">Mboa\'s Sikolo Path</string>
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
-    <string name="facebook_app_id">426953727866155</string>
-    <string name="fb_login_protocol_scheme">fb426953727866155</string>
-    <string name="web_client_id">819196506744-4oor9uasv24ujkqbl67fspqqa439cuji.apps.googleusercontent.com</string>
+    <string name="facebook_app_id" translatable="false">426953727866155</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb426953727866155</string>
+    <string name="web_client_id" translatable="false">819196506744-4oor9uasv24ujkqbl67fspqqa439cuji.apps.googleusercontent.com</string>
 
     <string name="search_hint">Search</string>
-    <string name="search_hint_specialities">Search specialities</string>
-    <string name="search_hint_schools">Search schools</string>
     <string name="search_hint_jobs">Search jobs</string>
+    <string name="search_hint_schools">Search schools</string>
+    <string name="search_hint_specialities">Search specialities</string>
 
     <string name="state_empty">There are no items</string>
     <string name="state_loading">Loading…</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="okay">Okay</string>
+    <string name="okay" translatable="false">Okay</string>
+    <string name="jobs">Jobs</string>
+    <string name="news">News</string>
+    <string name="cycle" translatable="false">Cycle</string>
+    <string name="about">About</string>
+    <string name="sector">Sector</string>
+    <string name="series">Series</string>
+    <string name="region" translatable="false">Region</string>
+    <string name="school">School</string>
+    <string name="explore">Explore</string>
+    <string name="contact" translatable="false">Contact</string>
+    <string name="schools">Schools</string>
+    <string name="sectors">Sectors</string>
+    <string name="division">Division</string>
+    <string name="localities">Localities</string>
+    <string name="orientation" translatable="false">Orientation</string>
+    <string name="sub_division">Sub division</string>
+    <string name="my_orientation">My orientation</string>
+
+    <string name="get_to">Get to</string>
+    <string name="exit_diploma">Exit diploma</string>
+    <string name="skills_obtained">Skills obtained</string>
+    <string name="subjects_taught">Subjects taught</string>
+    <string name="related_schools">Related Schools</string>
+    <string name="job_opportunities">Job opportunities</string>
+    <string name="access_conditions">Access conditions</string>
+
+    <string name="your_name">Your name</string>
+    <string name="is_it_okay">Is this okay?</string>
+    <string name="setup_summary">Hi, my name is <b>%1$s</b>, I am a <b>%2$s</b>, I was born on <b>%3$s</b> which makes me <b>%4$d</b>yrs, I live in <b>%5$s</b>.</string>
+    <string name="when_were_you_born">When were you born?</string>
+    <string name="what_is_your_gender">What is your gender?</string>
+    <string name="more_than_six_chars">Must be more than 6 characters</string>
+    <string name="where_are_you_located">Where are you located?</string>
+    <string name="how_should_we_call_you">How should we call you?</string>
+    <string name="review_info">Please review the information you provided</string>
+
+    <string name="welcome_message">Get started with your personal educational counsellor app</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+
+    <string name="date_of_birth">Date of birth</string>
+    <string name="signed_in_with_facebook">signed in with facebook</string>
+    <string name="signed_in_with_google">signed in with google</string>
+    <string name="tip_tap_on_any_item_to_modify_it">Tip: Tap on any item to modify it</string>
+
 </resources>
