@@ -13,7 +13,7 @@ enum class DataKey {
 
     SUBJECTS_TAUGHT,
 
-    USER,
+    NEWS,
 
     JOBS,
 

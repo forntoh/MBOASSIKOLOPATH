@@ -18,6 +18,7 @@ interface AppDataSource {
     val downloadedDepartements: LiveData<List<Departement>>
     val downloadedEducations: LiveData<List<Education>>
     val downloadedJobs: LiveData<List<Job>>
+    val downloadedNews: LiveData<List<News>>
     val downloadedLocalities: LiveData<List<Localite>>
     val downloadedRegions: LiveData<List<Region>>
     val downloadedSchools: LiveData<List<School>>
@@ -40,6 +41,7 @@ interface AppDataSource {
     suspend fun departements()
     suspend fun educations()
     suspend fun jobs()
+    suspend fun news()
     suspend fun localities()
     suspend fun regions()
     suspend fun schools()

@@ -15,7 +15,9 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_schoolsFragment_to_schoolFragment"
-            app:destination="@id/schoolFragment" />
+            app:destination="@id/schoolFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/jobsFragment"
@@ -27,7 +29,9 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_jobsFragment_to_seriesFragment"
-            app:destination="@id/seriesFragment" />
+            app:destination="@id/seriesFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -36,19 +40,29 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_schoolsFragment"
-            app:destination="@id/schoolsFragment" />
+            app:destination="@id/schoolsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_mainFragment_to_jobsFragment"
-            app:destination="@id/jobsFragment" />
+            app:destination="@id/jobsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_mainFragment_to_sectorFragment"
-            app:destination="@id/sectorFragment" />
+            app:destination="@id/sectorFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_mainFragment_to_specialityFragments"
-            app:destination="@id/specialityFragments" />
+            app:destination="@id/specialityFragments"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_mainFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
+            app:destination="@id/newsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/sectorFragment"
@@ -60,7 +74,9 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_sectorFragment_self"
-            app:destination="@id/sectorFragment" />
+            app:destination="@id/sectorFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
         <argument
             android:name="level"
             android:defaultValue="0"
@@ -73,7 +89,9 @@
             app:argType="string" />
         <action
             android:id="@+id/action_sectorFragment_to_seriesFragment"
-            app:destination="@id/seriesFragment" />
+            app:destination="@id/seriesFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/specialityFragments"
@@ -94,7 +112,9 @@
             app:argType="long" />
         <action
             android:id="@+id/action_schoolFragment_to_seriesFragment"
-            app:destination="@id/seriesFragment" />
+            app:destination="@id/seriesFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/seriesFragment"
@@ -114,13 +134,7 @@
         android:label="News"
         tools:layout="@layout/fragment_news">
         <argument
-            android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="description"
-            app:argType="string" />
-        <argument
-            android:name="image"
-            app:argType="string" />
+            android:name="newsId"
+            app:argType="integer" />
     </fragment>
 </navigation>

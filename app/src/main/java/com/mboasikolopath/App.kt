@@ -13,6 +13,7 @@ import com.mboasikolopath.data.repository.*
 import com.mboasikolopath.data.repository.relationships.*
 import com.mboasikolopath.ui.login.SetupViewModelFactory
 import com.mboasikolopath.ui.main.home.explore.jobs.JobsViewModelFactory
+import com.mboasikolopath.ui.main.home.explore.news.NewsViewModelFactory
 import com.mboasikolopath.ui.main.home.explore.schools.SchoolsViewModelFactory
 import com.mboasikolopath.ui.main.home.explore.schools.school.SchoolViewModelFactory
 import com.mboasikolopath.ui.main.home.explore.sector.SectorViewModelFactory
@@ -30,6 +31,10 @@ import org.kodein.di.generic.singleton
 @Suppress("unused")
 class App : MultiDexApplication(), KodeinAware {
 
+    companion object {
+        const val MODE = "Dev"
+    }
+
     override val kodein = Kodein.lazy {
         import(androidXModule(this@App))
 
@@ -45,68 +50,69 @@ class App : MultiDexApplication(), KodeinAware {
 
         // Relationships
         bind<CertificateDeboucheDao>() with singleton { instance<AppDatabase>().certificateDeboucheDao() }
-        //bind<CertificateDeboucheRepo>() with singleton { CertificateDeboucheRepoImplTest(instance(), instance()) }
-        bind<CertificateDeboucheRepo>() with singleton { CertificateDeboucheRepoImpl(instance(), instance(), instance()) }
-
         bind<SectionSpecialityDao>() with singleton { instance<AppDatabase>().sectionSpecialityDao() }
-        //bind<SectionSpecialityRepo>() with singleton { SectionSpecialityRepoImplTest(instance(), instance()) }
-        bind<SectionSpecialityRepo>() with singleton { SectionSpecialityRepoImpl(instance(), instance(), instance()) }
-
         bind<SeriesJobDao>() with singleton { instance<AppDatabase>().seriesJobDao() }
-        //bind<SeriesJobRepo>() with singleton { SeriesJobRepoImplTest(instance(), instance()) }
-        bind<SeriesJobRepo>() with singleton { SeriesJobRepoImpl(instance(), instance(), instance()) }
-
         bind<SeriesSchoolDao>() with singleton { instance<AppDatabase>().seriesSchoolDao() }
-        //bind<SeriesSchoolRepo>() with singleton { SeriesSchoolRepoImplTest(instance(), instance()) }
-        bind<SeriesSchoolRepo>() with singleton { SeriesSchoolRepoImpl(instance(), instance(), instance()) }
-
         bind<SeriesSubjectTaughtDao>() with singleton { instance<AppDatabase>().seriesSubjectTaughtDao() }
-        //bind<SeriesSubjectTaughtRepo>() with singleton { SeriesSubjectTaughtRepoImplTest(instance(), instance()) }
-        bind<SeriesSubjectTaughtRepo>() with singleton { SeriesSubjectTaughtRepoImpl(instance(), instance(), instance()) }
-
         // Base
         bind<LocaliteDao>() with singleton { instance<AppDatabase>().localiteDao() }
         bind<ArrondissementDao>() with singleton { instance<AppDatabase>().arrondissementDao() }
         bind<DepartementDao>() with singleton { instance<AppDatabase>().departementDao() }
         bind<RegionDao>() with singleton { instance<AppDatabase>().regionDao() }
-        //bind<LocationRepo>() with singleton { LocationRepoImplTest() }
-        bind<LocationRepo>() with singleton { LocationRepoImpl(instance(), instance(), instance(), instance(), instance(), instance()) }
-
+        bind<NewsDao>() with singleton { instance<AppDatabase>().newsDao() }
         bind<CertificateDao>() with singleton { instance<AppDatabase>().certificateDao() }
-        //bind<CertificateRepo>() with singleton { CertificateRepoImplTest() }
-        bind<CertificateRepo>() with singleton { CertificateRepoImpl(instance(), instance(), instance()) }
-
         bind<DeboucheDao>() with singleton { instance<AppDatabase>().deboucheDao() }
-        //bind<DeboucheRepo>() with singleton { DeboucheRepoImplTest() }
-        bind<DeboucheRepo>() with singleton { DeboucheRepoImpl(instance(), instance(), instance()) }
-
         bind<EducationDao>() with singleton { instance<AppDatabase>().educationDao() }
-        //bind<EducationRepo>() with singleton { EducationRepoImplTest() }
-        bind<EducationRepo>() with singleton { EducationRepoImpl(instance(), instance(), instance()) }
-
         bind<JobDao>() with singleton { instance<AppDatabase>().jobDao() }
-        //bind<JobRepo>() with singleton { JobRepoImplTest() }
-        bind<JobRepo>() with singleton { JobRepoImpl(instance(), instance(), instance()) }
-
         bind<SchoolDao>() with singleton { instance<AppDatabase>().schoolDao() }
-        //bind<SchoolRepo>() with singleton { SchoolRepoImplTest() }
-        bind<SchoolRepo>() with singleton { SchoolRepoImpl(instance(), instance(), instance()) }
-
         bind<SectionDao>() with singleton { instance<AppDatabase>().sectionDao() }
-        //bind<SectionRepo>() with singleton { SectionRepoImplTest() }
-        bind<SectionRepo>() with singleton { SectionRepoImpl(instance(), instance(), instance()) }
-
         bind<SeriesDao>() with singleton { instance<AppDatabase>().seriesDao() }
-        //bind<SeriesRepo>() with singleton { SeriesRepoImplTest() }
-        bind<SeriesRepo>() with singleton { SeriesRepoImpl(instance(), instance(), instance()) }
-
         bind<SpecialityDao>() with singleton { instance<AppDatabase>().specialityDao() }
-        //bind<SpecialityRepo>() with singleton { SpecialityRepoImplTest() }
-        bind<SpecialityRepo>() with singleton { SpecialityRepoImpl(instance(), instance(), instance()) }
-
         bind<SubjectTaughtDao>() with singleton { instance<AppDatabase>().subjectTaughtDao() }
-        //bind<SubjectTaughtRepo>() with singleton { SubjectTaughtRepoImplTest() }
-        bind<SubjectTaughtRepo>() with singleton { SubjectTaughtRepoImpl(instance(), instance(), instance()) }
+
+        when(MODE) {
+            "Dev" -> {
+                // Relationships
+                bind<CertificateDeboucheRepo>() with singleton { CertificateDeboucheRepoImplTest(instance(), instance()) }
+                bind<SectionSpecialityRepo>() with singleton { SectionSpecialityRepoImplTest(instance(), instance()) }
+                bind<SeriesJobRepo>() with singleton { SeriesJobRepoImplTest(instance(), instance()) }
+                bind<SeriesSchoolRepo>() with singleton { SeriesSchoolRepoImplTest(instance(), instance()) }
+                bind<SeriesSubjectTaughtRepo>() with singleton { SeriesSubjectTaughtRepoImplTest(instance(), instance()) }
+                // Base
+                bind<NewsRepo>() with singleton { NewsRepoImplTest() }
+                //bind<LocationRepo>() with singleton { LocationRepoImplTest() }
+                bind<CertificateRepo>() with singleton { CertificateRepoImplTest() }
+                bind<DeboucheRepo>() with singleton { DeboucheRepoImplTest() }
+                bind<EducationRepo>() with singleton { EducationRepoImplTest() }
+                bind<JobRepo>() with singleton { JobRepoImplTest() }
+                bind<SchoolRepo>() with singleton { SchoolRepoImplTest() }
+                bind<SectionRepo>() with singleton { SectionRepoImplTest() }
+                bind<SeriesRepo>() with singleton { SeriesRepoImplTest() }
+                bind<SpecialityRepo>() with singleton { SpecialityRepoImplTest() }
+                bind<SubjectTaughtRepo>() with singleton { SubjectTaughtRepoImplTest() }
+            }
+            "Pro" -> {
+                // Relationships
+                bind<CertificateDeboucheRepo>() with singleton { CertificateDeboucheRepoImpl(instance(), instance(), instance()) }
+                bind<SectionSpecialityRepo>() with singleton { SectionSpecialityRepoImpl(instance(), instance(), instance()) }
+                bind<SeriesJobRepo>() with singleton { SeriesJobRepoImpl(instance(), instance(), instance()) }
+                bind<SeriesSchoolRepo>() with singleton { SeriesSchoolRepoImpl(instance(), instance(), instance()) }
+                bind<SeriesSubjectTaughtRepo>() with singleton { SeriesSubjectTaughtRepoImpl(instance(), instance(), instance()) }
+                // Base
+                bind<NewsRepo>() with singleton { NewsRepoImpl(instance(), instance(), instance()) }
+                bind<LocationRepo>() with singleton { LocationRepoImpl(instance(), instance(), instance(), instance(), instance(), instance()) }
+                bind<CertificateRepo>() with singleton { CertificateRepoImpl(instance(), instance(), instance()) }
+                bind<EducationRepo>() with singleton { EducationRepoImpl(instance(), instance(), instance()) }
+                bind<DeboucheRepo>() with singleton { DeboucheRepoImpl(instance(), instance(), instance()) }
+                bind<JobRepo>() with singleton { JobRepoImpl(instance(), instance(), instance()) }
+                bind<SchoolRepo>() with singleton { SchoolRepoImpl(instance(), instance(), instance()) }
+                bind<SectionRepo>() with singleton { SectionRepoImpl(instance(), instance(), instance()) }
+                bind<SeriesRepo>() with singleton { SeriesRepoImpl(instance(), instance(), instance()) }
+                bind<SpecialityRepo>() with singleton { SpecialityRepoImpl(instance(), instance(), instance()) }
+                bind<SubjectTaughtRepo>() with singleton { SubjectTaughtRepoImpl(instance(), instance(), instance()) }
+            }
+        }
+        bind<LocationRepo>() with singleton { LocationRepoImpl(instance(), instance(), instance(), instance(), instance(), instance()) }
 
         bind<UserDao>() with singleton { instance<AppDatabase>().userDao() }
         bind<UserRepo>() with singleton { UserRepoImpl(instance(), instance(), instance()) }
@@ -118,6 +124,7 @@ class App : MultiDexApplication(), KodeinAware {
         bind<SeriesViewModelFactory>() with provider { SeriesViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
         bind<ProfileViewModelFactory>() with provider { ProfileViewModelFactory(instance(), instance()) }
         bind<SetupViewModelFactory>() with provider { SetupViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
+        bind<NewsViewModelFactory>() with provider { NewsViewModelFactory(instance()) }
     }
 
     override fun attachBaseContext(base: Context?) {

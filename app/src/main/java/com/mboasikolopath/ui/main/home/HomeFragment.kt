@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +16,8 @@ import com.mboasikolopath.ui.login.SetupViewModel
 import com.mboasikolopath.ui.login.SetupViewModelFactory
 import com.mboasikolopath.ui.main.MainActivity
 import com.mboasikolopath.ui.main.MainFragmentDirections
+import com.mboasikolopath.ui.main.home.explore.news.NewsViewModel
+import com.mboasikolopath.ui.main.home.explore.news.NewsViewModelFactory
 import com.mboasikolopath.utilities.InsetDecoration
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.OnItemClickListener
@@ -27,9 +29,10 @@ import org.kodein.di.generic.instance
 
 class HomeFragment : ScopedFragment(), View.OnClickListener {
 
-    private lateinit var viewModel: HomeViewModel
-    private lateinit var viewModelSetup: SetupViewModel
+    private lateinit var newsViewModel: NewsViewModel
+    private val newsViewModelFactory: NewsViewModelFactory by instance()
 
+    private lateinit var viewModelSetup: SetupViewModel
     private val setupViewModelFactory: SetupViewModelFactory by instance()
 
     private val newsSection = Section()
@@ -41,12 +44,12 @@ class HomeFragment : ScopedFragment(), View.OnClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        viewModelSetup = ViewModelProviders.of(this, setupViewModelFactory).get(SetupViewModel::class.java)
+        newsViewModel = ViewModelProvider(this, newsViewModelFactory).get(NewsViewModel::class.java)
+        viewModelSetup = ViewModelProvider(this, setupViewModelFactory).get(SetupViewModel::class.java)
         buildUI()
     }
 
-    private fun buildUI() {
+    private fun buildUI() = launch {
         (activity as MainActivity).hideTabHost(false)
 
         val newsAdapter = GroupAdapter<ViewHolder>().apply {
@@ -58,12 +61,12 @@ class HomeFragment : ScopedFragment(), View.OnClickListener {
             adapter = newsAdapter
             addItemDecoration(InsetDecoration(16))
         }
-        newsSection.update(viewModel.getNews())
+        newsSection.update(newsViewModel.getNews())
 
-        btn_schools.setOnClickListener(this)
-        btn_jobs.setOnClickListener(this)
-        btn_sector.setOnClickListener(this)
-        btn_series.setOnClickListener(this)
+        btn_schools.setOnClickListener(this@HomeFragment)
+        btn_jobs.setOnClickListener(this@HomeFragment)
+        btn_sector.setOnClickListener(this@HomeFragment)
+        btn_series.setOnClickListener(this@HomeFragment)
     }
 
     override fun onClick(v: View?) {
@@ -86,7 +89,7 @@ class HomeFragment : ScopedFragment(), View.OnClickListener {
         if (item is NewsItem) {
             (activity as MainActivity).hideTabHost(true)
             NavHostFragment.findNavController(this).navigate(
-                MainFragmentDirections.actionMainFragmentToNewsFragment(item.title, item.description, item.thumbnail)
+                MainFragmentDirections.actionMainFragmentToNewsFragment(item._id)
             )
         }
     }

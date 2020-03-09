@@ -9,8 +9,29 @@ import com.mboasikolopath.data.model.*
 import com.mboasikolopath.data.model.relationships.*
 
 @Database(
-    entities = [Arrondissement::class, Certificate::class, Debouche::class, Departement::class, Education::class, Job::class, Localite::class, Region::class, School::class, Section::class, Series::class, Speciality::class, SubjectTaught::class, User::class, CertificateDebouche::class, SectionSpeciality::class, SeriesJob::class, SeriesSchool::class, SeriesSubjectTaught::class],
-    version = 2,
+    entities = [
+        Arrondissement::class,
+        Certificate::class,
+        Debouche::class,
+        Departement::class,
+        Education::class,
+        Job::class,
+        Localite::class,
+        News::class,
+        Region::class,
+        School::class,
+        Section::class,
+        Series::class,
+        Speciality::class,
+        SubjectTaught::class,
+        User::class,
+        CertificateDebouche::class,
+        SectionSpeciality::class,
+        SeriesJob::class,
+        SeriesSchool::class,
+        SeriesSubjectTaught::class
+    ],
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -28,6 +49,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun educationDao(): EducationDao
     abstract fun jobDao(): JobDao
     abstract fun localiteDao(): LocaliteDao
+    abstract fun newsDao(): NewsDao
     abstract fun regionDao(): RegionDao
     abstract fun schoolDao(): SchoolDao
     abstract fun sectionDao(): SectionDao

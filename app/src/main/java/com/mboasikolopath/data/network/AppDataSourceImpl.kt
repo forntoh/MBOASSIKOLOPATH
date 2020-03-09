@@ -56,6 +56,10 @@ class AppDataSourceImpl(private val apiService: ApiService) : AppDataSource {
     override val downloadedJobs: LiveData<List<Job>>
         get() = _downloadedJobs
 
+    private val _downloadedNews = MutableLiveData<List<News>>()
+    override val downloadedNews: LiveData<List<News>>
+        get() = _downloadedNews
+
     private val _downloadedLocalities = MutableLiveData<List<Localite>>()
     override val downloadedLocalities: LiveData<List<Localite>>
         get() = _downloadedLocalities
@@ -210,6 +214,18 @@ class AppDataSourceImpl(private val apiService: ApiService) : AppDataSource {
             val fetchedData = apiService.jobs.awaitResponse()
             if (fetchedData.isSuccessful)
             _downloadedJobs.postValue(fetchedData.body())
+        } catch (e: NoConnectivityException) {
+            Log.e("Connectivity", "No Internet", e)
+        } catch (e: SocketTimeoutException) {
+            Log.e("SocketTimeout", "Could not connect to server", e)
+        }
+    }
+
+    override suspend fun news() {
+        try {
+            val fetchedData = apiService.news.awaitResponse()
+            if (fetchedData.isSuccessful)
+                _downloadedNews.postValue(fetchedData.body())
         } catch (e: NoConnectivityException) {
             Log.e("Connectivity", "No Internet", e)
         } catch (e: SocketTimeoutException) {

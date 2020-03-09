@@ -55,6 +55,10 @@ interface ApiService {
     @get:GET("localities")
     val localities: Call<List<Localite>>
 
+
+    @get:GET("news")
+    val news: Call<List<News>>
+
     @get:GET("regions")
     val regions: Call<List<Region>>
 
