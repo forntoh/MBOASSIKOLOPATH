@@ -1,12 +1,12 @@
 package com.mboasikolopath.data.model.relationships
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import com.google.gson.annotations.SerializedName
 import com.mboasikolopath.data.model.Series
 import com.mboasikolopath.data.model.SubjectTaught
+import com.mboasikolopath.data.model.relationships.pairs.SeriesSubjectTaughtPair
 
 @Entity(
     primaryKeys = ["SeriesID", "SubjectTaughtID"], foreignKeys = [ForeignKey(
@@ -35,14 +35,6 @@ data class SeriesSubjectTaught(
             }
         }
     }
-}
-
-class SeriesSubjectTaughtPair {
-    @Embedded(prefix = "Series_")
-    lateinit var Series: Series
-
-    @Embedded
-    lateinit var SubjectTaught: SubjectTaught
 }
 
 data class SeriesAndItsSubjectsTaught(

@@ -142,12 +142,9 @@ class LocationRepoImpl(
     }
 
     override suspend fun findRegionOfLocality(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext findByRegionID(
-            findByDepartementID(
-                findByArrondissementID(
-                    findByLocaliteID(id).ArrondissementID
-                ).DepartementID
-            ).RegionID
-        )
+        return@withContext findByLocaliteID(id)?.ArrondissementID?.let {
+            findByArrondissementID(it).DepartementID
+        }?.let { findByDepartementID(it).RegionID
+        }?.let { findByRegionID(it) }
     }
 }

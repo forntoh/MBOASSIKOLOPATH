@@ -112,7 +112,7 @@
         tools:layout="@layout/fragment_school">
         <argument
             android:name="id"
-            app:argType="long" />
+            app:argType="integer" />
         <action
             android:id="@+id/action_schoolFragment_to_seriesFragment"
             app:destination="@id/seriesFragment"

@@ -15,9 +15,9 @@ import com.mboasikolopath.internal.view.GenericListItem
 import com.mboasikolopath.ui.base.ScopedFragment
 import com.mboasikolopath.ui.main.MainActivity
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.Section
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_speciality.*
 import kotlinx.coroutines.launch
 
@@ -46,7 +46,7 @@ class SpecialityFragment : ScopedFragment() {
         GenericListItem.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_book_open_page)
             .apply { this!!.setColorFilter(args.color, PorterDuff.Mode.SRC_ATOP) }
 
-        val schoolsAdapter = GroupAdapter<ViewHolder>().apply {
+        val schoolsAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(seriesSection)
             setOnItemClickListener(onItemClickListener)
         }

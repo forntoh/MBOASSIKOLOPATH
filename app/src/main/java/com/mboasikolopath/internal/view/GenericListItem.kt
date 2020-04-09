@@ -15,8 +15,8 @@ import com.mboasikolopath.ui.main.home.explore.jobs.JobsFragmentDirections
 import com.mboasikolopath.ui.main.home.explore.sector.SectorFragment
 import com.mboasikolopath.ui.main.home.explore.sector.SectorFragmentDirections
 import com.mboasikolopath.utilities.setupGroup
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_expansion.view.*
 import kotlinx.android.synthetic.main.item_list_generic.view.*
 import kotlinx.android.synthetic.main.item_list_generic.view.item_expansion
@@ -40,7 +40,7 @@ data class GenericListItem(
         var fragment: Fragment? = null
     }
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         context = viewHolder.itemView.context
 
         if (icon == null) icon = ContextCompat.getDrawable(context, R.drawable.ic_ellipse)

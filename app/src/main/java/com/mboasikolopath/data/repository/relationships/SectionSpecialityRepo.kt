@@ -1,7 +1,7 @@
 package com.mboasikolopath.data.repository.relationships
 
 import com.mboasikolopath.data.model.Speciality
-import com.mboasikolopath.data.model.relationships.SectionSpecialityPair
+import com.mboasikolopath.data.model.relationships.pairs.SectionSpecialityPair
 import com.mboasikolopath.data.repository.BaseRepository
 
 abstract class SectionSpecialityRepo: BaseRepository() {

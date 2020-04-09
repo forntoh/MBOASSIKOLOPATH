@@ -9,7 +9,7 @@ abstract class LocationRepo: BaseRepository() {
 
     abstract suspend fun loadAllLocalites(): List<Localite>
 
-    abstract suspend fun findByLocaliteID(id: Int): Localite
+    abstract suspend fun findByLocaliteID(id: Int): Localite?
 
     abstract suspend fun findLocalitesOfArrondissement(id: Int): List<Localite>
 
@@ -29,5 +29,5 @@ abstract class LocationRepo: BaseRepository() {
 
     abstract suspend fun findByRegionID(id: Int): Region
 
-    abstract suspend fun findRegionOfLocality(id: Int): Region
+    abstract suspend fun findRegionOfLocality(id: Int): Region?
 }

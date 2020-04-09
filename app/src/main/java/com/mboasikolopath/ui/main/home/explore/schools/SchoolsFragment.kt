@@ -2,6 +2,7 @@ package com.mboasikolopath.ui.main.home.explore.schools
 
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,9 +21,9 @@ import com.mboasikolopath.utilities.onQueryTextListener
 import com.mboasikolopath.utilities.onSearchViewShown
 import com.mboasikolopath.utilities.toggleViewState
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.Section
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_schools.*
 import kotlinx.coroutines.launch
@@ -54,7 +55,7 @@ class SchoolsFragment : ScopedFragment() {
         GenericListItem.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_schools)
             .apply { this!!.setColorFilter(args.color, PorterDuff.Mode.SRC_ATOP) }
 
-        val schoolsAdapter = GroupAdapter<ViewHolder>().apply {
+        val schoolsAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(schoolsSection)
             setOnItemClickListener(onItemClickListener)
         }
@@ -80,8 +81,9 @@ class SchoolsFragment : ScopedFragment() {
     }
 
     private val onItemClickListener = OnItemClickListener { item, _ ->
+        Log.d("API", item.toString())
         if (item is GenericListItem) NavHostFragment.findNavController(this).navigate(
-            SchoolsFragmentDirections.actionSchoolsFragmentToSchoolFragment(item._id.toLong())
+            SchoolsFragmentDirections.actionSchoolsFragmentToSchoolFragment(item._id.toInt())
         )
     }
 

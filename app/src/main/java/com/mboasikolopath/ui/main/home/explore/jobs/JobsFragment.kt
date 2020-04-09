@@ -19,9 +19,9 @@ import com.mboasikolopath.utilities.onQueryTextListener
 import com.mboasikolopath.utilities.onSearchViewShown
 import com.mboasikolopath.utilities.toggleViewState
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.Section
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_jobs.*
 import kotlinx.coroutines.launch
@@ -54,7 +54,7 @@ class JobsFragment : ScopedFragment() {
         GenericListItem.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_worker)
             .apply { this!!.setColorFilter(args.color, PorterDuff.Mode.SRC_ATOP) }
 
-        val schoolsAdapter = GroupAdapter<ViewHolder>().apply {
+        val schoolsAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(jobsSection)
             setOnItemClickListener(onItemClickListener)
         }

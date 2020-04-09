@@ -6,4 +6,4 @@
     android:layout_height="100dp"
     android:scaleType="centerCrop"
     app:riv_corner_radius="8dp"
-    tools:src="@drawable/dummy_news" />
+    tools:src="@tools:sample/backgrounds/scenic" />

@@ -13,12 +13,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/dummy_news"
         app:layout_constraintBottom_toBottomOf="@+id/tv_sign_in_method"
         app:layout_constraintCircleRadius="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_user_name"
-        app:riv_corner_radius="5dp" />
+        app:riv_corner_radius="5dp"
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tv_user_name"

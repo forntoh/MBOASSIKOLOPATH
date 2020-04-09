@@ -8,7 +8,9 @@ import com.mboasikolopath.data.model.*
 import com.mboasikolopath.data.model.relationships.*
 import com.mboasikolopath.internal.NoConnectivityException
 import com.mboasikolopath.utilities.Error
+import retrofit2.Response
 import retrofit2.awaitResponse
+import java.io.EOFException
 import java.net.SocketTimeoutException
 
 class AppDataSourceImpl(private val apiService: ApiService) : AppDataSource {
@@ -92,225 +94,62 @@ class AppDataSourceImpl(private val apiService: ApiService) : AppDataSource {
     override val downloadedUser: LiveData<User>
         get() = _downloadedUser
 
-    override suspend fun certificateDebouches() {
-        try {
-            val fetchedData = apiService.certificateDebouches.awaitResponse()
-            if (fetchedData.isSuccessful)
-                _downloadedCertificateDebouches.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun certificateDebouches() =
+        _downloadedCertificateDebouches.postValue(apiCover { apiService.certificateDebouches.awaitResponse() })
 
-    override suspend fun sectionSpecialities() {
-        try {
-            val fetchedData = apiService.sectionSpecialities.awaitResponse()
-            if (fetchedData.isSuccessful)
-                _downloadedSectionSpecialities.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun sectionSpecialities() =
+        _downloadedSectionSpecialities.postValue(apiCover { apiService.sectionSpecialities.awaitResponse() })
 
-    override suspend fun seriesJobs() {
-        try {
-            val fetchedData = apiService.seriesJobs.awaitResponse()
-            if (fetchedData.isSuccessful)
-                _downloadedSeriesJobs.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun seriesJobs() =
+        _downloadedSeriesJobs.postValue(apiCover { apiService.seriesJobs.awaitResponse() })
 
-    override suspend fun seriesSchools() {
-        try {
-            val fetchedData = apiService.seriesSchools.awaitResponse()
-            if (fetchedData.isSuccessful)
-                _downloadedSeriesSchools.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun seriesSchools() =
+        _downloadedSeriesSchools.postValue(apiCover { apiService.seriesSchools.awaitResponse() })
 
-    override suspend fun seriesSubjectsTaught() {
-        try {
-            val fetchedData = apiService.seriesSubjectsTaught.awaitResponse()
-            if (fetchedData.isSuccessful)
-                _downloadedSeriesSubjectsTaught.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun seriesSubjectsTaught() =
+        _downloadedSeriesSubjectsTaught.postValue(apiCover { apiService.seriesSubjectsTaught.awaitResponse() })
 
-    override suspend fun arrondissements() {
-        try {
-            val fetchedData = apiService.arrondissements.awaitResponse()
-            _downloadedArrondissements.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun arrondissements() =
+        _downloadedArrondissements.postValue(apiCover { apiService.arrondissements.awaitResponse() })
 
-    override suspend fun certificates() {
-        try {
-            val fetchedData = apiService.certificates.awaitResponse()
-            _downloadedCertificates.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun certificates() =
+        _downloadedCertificates.postValue(apiCover { apiService.certificates.awaitResponse() })
 
-    override suspend fun debouches() {
-        try {
-            val fetchedData = apiService.debouches.awaitResponse()
-            if (fetchedData.isSuccessful)
-            _downloadedDebouches.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun debouches() =
+        _downloadedDebouches.postValue(apiCover { apiService.debouches.awaitResponse() })
 
-    override suspend fun departements() {
-        try {
-            val fetchedData = apiService.departements.awaitResponse()
-            _downloadedDepartements.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun departements() =
+        _downloadedDepartements.postValue(apiCover { apiService.departements.awaitResponse() })
 
-    override suspend fun educations() {
-        try {
-            val fetchedData = apiService.educations.awaitResponse()
-            if (fetchedData.isSuccessful)
-            _downloadedEducations.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun educations() =
+        _downloadedEducations.postValue(apiCover { apiService.educations.awaitResponse() })
 
-    override suspend fun jobs() {
-        try {
-            val fetchedData = apiService.jobs.awaitResponse()
-            if (fetchedData.isSuccessful)
-            _downloadedJobs.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun jobs() =
+        _downloadedJobs.postValue(apiCover { apiService.jobs.awaitResponse() })
 
-    override suspend fun news() {
-        try {
-            val fetchedData = apiService.news.awaitResponse()
-            if (fetchedData.isSuccessful)
-                _downloadedNews.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun news() =
+        _downloadedNews.postValue(apiCover { apiService.news.awaitResponse() })
 
-    override suspend fun localities() {
-        try {
-            val fetchedData = apiService.localities.awaitResponse()
-            _downloadedLocalities.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun localities() =
+        _downloadedLocalities.postValue(apiCover { apiService.localities.awaitResponse() })
 
-    override suspend fun regions() {
-        try {
-            val fetchedData = apiService.regions.awaitResponse()
-            _downloadedRegions.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun regions() =
+        _downloadedRegions.postValue(apiCover { apiService.regions.awaitResponse() })
 
-    override suspend fun schools() {
-        try {
-            val fetchedData = apiService.schools.awaitResponse()
-            _downloadedSchools.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun schools() =
+        _downloadedSchools.postValue(apiCover { apiService.schools.awaitResponse() })
 
-    override suspend fun sections() {
-        try {
-            val fetchedData = apiService.sections.awaitResponse()
-            _downloadedSections.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun sections() =
+        _downloadedSections.postValue(apiCover { apiService.sections.awaitResponse() })
 
-    override suspend fun series() {
-        try {
-            val fetchedData = apiService.series.awaitResponse()
-            _downloadedSeries.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun series() =
+        _downloadedSeries.postValue(apiCover { apiService.series.awaitResponse() })
 
-    override suspend fun specialities() {
-        try {
-            val fetchedData = apiService.specialities.awaitResponse()
-            if (fetchedData.isSuccessful)
-            _downloadedSpecialities.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun specialities() =
+        _downloadedSpecialities.postValue(apiCover { apiService.specialities.awaitResponse() })
 
-    override suspend fun subjectsTaught() {
-        try {
-            val fetchedData = apiService.subjectsTaught.awaitResponse()
-            if (fetchedData.isSuccessful)
-            _downloadedSubjectsTaught.postValue(fetchedData.body())
-        } catch (e: NoConnectivityException) {
-            Log.e("Connectivity", "No Internet", e)
-        } catch (e: SocketTimeoutException) {
-            Log.e("SocketTimeout", "Could not connect to server", e)
-        }
-    }
+    override suspend fun subjectsTaught() =
+        _downloadedSubjectsTaught.postValue(apiCover { apiService.subjectsTaught.awaitResponse() })
 
     override suspend fun login(user: User) {
         try {
@@ -342,5 +181,22 @@ class AppDataSourceImpl(private val apiService: ApiService) : AppDataSource {
         } catch (e: SocketTimeoutException) {
             Log.e("SocketTimeout", "Could not connect to server", e)
         }
+    }
+
+    //==============================================================================================
+
+    private suspend fun <T> apiCover(api: suspend () -> Response<T>): T? {
+        try {
+            val fetchedData = api.invoke()
+            Log.d("API", fetchedData.toString())
+            if (fetchedData.isSuccessful) return fetchedData.body()
+        } catch (e: NoConnectivityException) {
+            Log.e("NoConnectivityException", "No Internet", e)
+        } catch (e: SocketTimeoutException) {
+            Log.e("SocketTimeout", "Could not connect to server", e)
+        } catch (e: EOFException) {
+            Log.e("EOFException", "${e.message}", e)
+        }
+        return null
     }
 }

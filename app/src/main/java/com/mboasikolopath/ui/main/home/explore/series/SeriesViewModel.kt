@@ -64,7 +64,7 @@ class SeriesViewModel(
             GenericListItem(
                 it.SchoolID.toString(),
                 it.Name,
-                locationRepo.findRegionOfLocality(it.LocaliteID).Name
+                locationRepo.findRegionOfLocality(it.LocaliteID)?.Name
             )
         }
     }

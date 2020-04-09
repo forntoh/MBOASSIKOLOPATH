@@ -1,12 +1,12 @@
 package com.mboasikolopath.data.model.relationships
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import com.google.gson.annotations.SerializedName
 import com.mboasikolopath.data.model.Certificate
 import com.mboasikolopath.data.model.Debouche
+import com.mboasikolopath.data.model.relationships.pairs.CertificateDebouchePair
 
 @Entity(
     primaryKeys = ["CertificateID", "DeboucheID"], foreignKeys = [ForeignKey(
@@ -35,15 +35,6 @@ data class CertificateDebouche(
             }
         }
     }
-}
-
-class CertificateDebouchePair {
-
-    @Embedded(prefix = "Certificate_")
-    lateinit var Certificate: Certificate
-
-    @Embedded
-    lateinit var Debouche: Debouche
 }
 
 data class CertificateAndItsDebouches(

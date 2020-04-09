@@ -3,7 +3,7 @@ package com.mboasikolopath.data.repository.relationships
 import com.mboasikolopath.data.db.relationships.SectionSpecialityDao
 import com.mboasikolopath.data.model.Speciality
 import com.mboasikolopath.data.model.relationships.SectionSpeciality
-import com.mboasikolopath.data.model.relationships.SectionSpecialityPair
+import com.mboasikolopath.data.model.relationships.pairs.SectionSpecialityPair
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey

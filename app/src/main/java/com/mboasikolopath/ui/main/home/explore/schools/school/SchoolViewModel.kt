@@ -5,11 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.mboasikolopath.data.repository.LocationRepo
 import com.mboasikolopath.data.repository.SchoolRepo
 import com.mboasikolopath.data.repository.relationships.SeriesSchoolRepo
-import com.mboasikolopath.internal.lazyDeferred
 import com.mboasikolopath.internal.view.CarouselItem
 import com.mboasikolopath.internal.view.LocationDataItem
 
-class SchoolViewModel(private val schoolId: Int, private val locationRepo: LocationRepo, private val schoolRepo: SchoolRepo, private val seriesSchoolRepo: SeriesSchoolRepo) : ViewModel() {
+class SchoolViewModel(private val locationRepo: LocationRepo, private val schoolRepo: SchoolRepo, private val seriesSchoolRepo: SeriesSchoolRepo) : ViewModel() {
 
     init {
         locationRepo.scope = viewModelScope
@@ -17,26 +16,23 @@ class SchoolViewModel(private val schoolId: Int, private val locationRepo: Locat
         seriesSchoolRepo.scope = viewModelScope
     }
 
-    val school by lazyDeferred {
-        schoolRepo.findBySchoolID(schoolId)
-    }
+    suspend fun school(id: Int) =
+        schoolRepo.findBySchoolID(id)
 
-    val seriesFirstCycle by lazyDeferred {
+    suspend fun seriesFirstCycle(schoolId: Int)=
         seriesSchoolRepo.findSeriesBySchoolID(schoolId).filter { it.Cycle == 1 }.map { it.SeriesID }
-    }
 
-    val seriesSecondCycle by lazyDeferred {
+    suspend fun seriesSecondCycle(schoolId: Int) =
         seriesSchoolRepo.findSeriesBySchoolID(schoolId).filter { it.Cycle == 2 }.map { it.SeriesID }
-    }
 
-    val locationData by lazyDeferred {
+    suspend fun locationData(schoolId: Int): List<LocationDataItem> {
         val school = schoolRepo.findBySchoolID(schoolId)
-        val localite = locationRepo.findByLocaliteID(school.LocaliteID)
+        val localite = locationRepo.findByLocaliteID(school.LocaliteID) ?: return emptyList()
         val arrondissement = locationRepo.findByArrondissementID(localite.ArrondissementID)
         val departement = locationRepo.findByDepartementID(arrondissement.DepartementID)
         val region = locationRepo.findByRegionID(departement.RegionID)
 
-        listOf(
+        return listOf(
             LocationDataItem("Region", region.Name),
             LocationDataItem("Departement", departement.Name),
             LocationDataItem("Arrondissement", arrondissement.Name),

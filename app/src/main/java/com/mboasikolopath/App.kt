@@ -32,7 +32,7 @@ import org.kodein.di.generic.singleton
 class App : MultiDexApplication(), KodeinAware {
 
     companion object {
-        const val MODE = "Dev"
+        const val MODE = "Pro"
     }
 
     override val kodein = Kodein.lazy {
@@ -69,6 +69,7 @@ class App : MultiDexApplication(), KodeinAware {
         bind<SeriesDao>() with singleton { instance<AppDatabase>().seriesDao() }
         bind<SpecialityDao>() with singleton { instance<AppDatabase>().specialityDao() }
         bind<SubjectTaughtDao>() with singleton { instance<AppDatabase>().subjectTaughtDao() }
+        bind<UserDao>() with singleton { instance<AppDatabase>().userDao() }
 
         when(MODE) {
             "Dev" -> {
@@ -80,7 +81,7 @@ class App : MultiDexApplication(), KodeinAware {
                 bind<SeriesSubjectTaughtRepo>() with singleton { SeriesSubjectTaughtRepoImplTest(instance(), instance()) }
                 // Base
                 bind<NewsRepo>() with singleton { NewsRepoImplTest() }
-                //bind<LocationRepo>() with singleton { LocationRepoImplTest() }
+                bind<LocationRepo>() with singleton { LocationRepoImpl(instance(), instance(), instance(), instance(), instance(), instance()) }
                 bind<CertificateRepo>() with singleton { CertificateRepoImplTest() }
                 bind<DeboucheRepo>() with singleton { DeboucheRepoImplTest() }
                 bind<EducationRepo>() with singleton { EducationRepoImplTest(instance()) }
@@ -90,6 +91,7 @@ class App : MultiDexApplication(), KodeinAware {
                 bind<SeriesRepo>() with singleton { SeriesRepoImplTest() }
                 bind<SpecialityRepo>() with singleton { SpecialityRepoImplTest() }
                 bind<SubjectTaughtRepo>() with singleton { SubjectTaughtRepoImplTest() }
+                bind<UserRepo>() with singleton { UserRepoImpl(instance(), instance(), instance()) }
             }
             "Pro" -> {
                 // Relationships
@@ -110,12 +112,9 @@ class App : MultiDexApplication(), KodeinAware {
                 bind<SeriesRepo>() with singleton { SeriesRepoImpl(instance(), instance(), instance()) }
                 bind<SpecialityRepo>() with singleton { SpecialityRepoImpl(instance(), instance(), instance()) }
                 bind<SubjectTaughtRepo>() with singleton { SubjectTaughtRepoImpl(instance(), instance(), instance()) }
+                bind<UserRepo>() with singleton { UserRepoImpl(instance(), instance(), instance()) }
             }
         }
-        bind<LocationRepo>() with singleton { LocationRepoImpl(instance(), instance(), instance(), instance(), instance(), instance()) }
-
-        bind<UserDao>() with singleton { instance<AppDatabase>().userDao() }
-        bind<UserRepo>() with singleton { UserRepoImpl(instance(), instance(), instance()) }
 
         bind<SchoolViewModelFactory>() with provider { SchoolViewModelFactory(instance(), instance(), instance()) }
         bind<SchoolsViewModelFactory>() with provider { SchoolsViewModelFactory(instance(), instance()) }

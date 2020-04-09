@@ -11,8 +11,8 @@ import com.mboasikolopath.R
 import com.mboasikolopath.ui.base.ScopedFragment
 import com.mboasikolopath.utilities.InsetDecoration
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Section
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_about.*
 import kotlinx.coroutines.launch
 
@@ -36,7 +36,7 @@ class AboutFragment : ScopedFragment() {
     private fun bindUI() = launch {
         tv_about.text = viewModel.about
 
-        val contactsAdapter = GroupAdapter<ViewHolder>().apply {
+        val contactsAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(simpleContactsSection)
         }
         rv_contact.apply {

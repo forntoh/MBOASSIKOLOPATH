@@ -4,7 +4,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.mboasikolopath.data.model.SubjectTaught
 import com.mboasikolopath.data.model.relationships.SeriesSubjectTaught
-import com.mboasikolopath.data.model.relationships.SeriesSubjectTaughtPair
+import com.mboasikolopath.data.model.relationships.pairs.SeriesSubjectTaughtPair
 import com.mboasikolopath.data.repository.SeriesRepo
 import com.mboasikolopath.data.repository.SubjectTaughtRepo
 
@@ -19,7 +19,9 @@ class SeriesSubjectTaughtRepoImplTest(
         val list = mutableListOf<SeriesSubjectTaughtPair>()
         for (i in 0..15) {
             for (j in 0..4) {
-                list.add(SeriesSubjectTaughtPair().apply {
+                list.add(
+                    SeriesSubjectTaughtPair()
+                        .apply {
                     Series = seriesRepo.loadAll()[i]
                     SubjectTaught = subjectTaughtRepo.findBySubjectTaughtID(j)
                 })

@@ -12,8 +12,8 @@ import com.mboasikolopath.R
 import com.mboasikolopath.ui.base.ScopedFragment
 import com.mboasikolopath.utilities.setupGroup
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Section
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_series.*
 import kotlinx.coroutines.launch
 import org.kodein.di.generic.instance
@@ -53,7 +53,7 @@ class SeriesFragment : ScopedFragment() {
         tv_acceder_a.text = viewModel.getAccederA()
 
         // Load Access conditions***************************************************************************************
-        val accessConditionsAdapter = GroupAdapter<ViewHolder>().apply {
+        val accessConditionsAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(accessConditionsSection)
         }
         rv_access_conditions.apply {
@@ -63,7 +63,7 @@ class SeriesFragment : ScopedFragment() {
         accessConditionsSection.update(viewModel.getAccessConditions())
 
         // Load subjects taught*****************************************************************************************
-        val subjectsTaughtAdapter = GroupAdapter<ViewHolder>().apply {
+        val subjectsTaughtAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(subjectsTaughtSection)
         }
         rv_subject_taught.apply {
@@ -73,7 +73,7 @@ class SeriesFragment : ScopedFragment() {
         subjectsTaughtSection.update(viewModel.subjectsTaught.await())
 
         // Load skills obtained*****************************************************************************************
-        val skillsObtainedAdapter = GroupAdapter<ViewHolder>().apply {
+        val skillsObtainedAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(skillsObtainedSection)
         }
         rv_skills_obtained.apply {
@@ -83,7 +83,7 @@ class SeriesFragment : ScopedFragment() {
         skillsObtainedSection.update(viewModel.getSkillsObtained())
 
         // Load related schools*****************************************************************************************
-        val relatedSchoolsAdapter = GroupAdapter<ViewHolder>().apply {
+        val relatedSchoolsAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(relatedSchoolsSection)
         }
         rv_schools.apply {

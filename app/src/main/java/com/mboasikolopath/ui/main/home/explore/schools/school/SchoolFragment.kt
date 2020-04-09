@@ -15,8 +15,8 @@ import com.mboasikolopath.ui.base.ScopedFragment
 import com.mboasikolopath.utilities.InsetDecoration
 import com.mboasikolopath.utilities.setupGroup
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Section
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_school.*
 import kotlinx.android.synthetic.main.item_expansion.*
 import kotlinx.coroutines.launch
@@ -39,15 +39,14 @@ class SchoolFragment : ScopedFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModelFactory.schoolId = args.id.toInt()
         viewModel = ViewModelProvider(this, viewModelFactory).get(SchoolViewModel::class.java)
         bindUI()
     }
 
     private fun bindUI() = launch {
-        tv_school_name.text = viewModel.school.await().Name
+        tv_school_name.text = viewModel.school(args.id).Name
 
-        val schoolsAdapter = GroupAdapter<ViewHolder>().apply {
+        val schoolsAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(locationDataSection)
         }
         rv_location_data.apply {
@@ -55,9 +54,9 @@ class SchoolFragment : ScopedFragment() {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             addItemDecoration(InsetDecoration(16))
         }
-        locationDataSection.update(viewModel.locationData.await())
+        locationDataSection.update(viewModel.locationData(args.id))
 
-        val photosAdapter = GroupAdapter<ViewHolder>().apply {
+        val photosAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(photosSection)
         }
         rv_photos.apply {
@@ -67,8 +66,8 @@ class SchoolFragment : ScopedFragment() {
         }
         photosSection.update(viewModel.getPhotos())
 
-        item_list_1_chips.setupGroup(viewModel.seriesFirstCycle.await(), item_list_1_title, chipOnClickListener)
-        item_list_2_chips.setupGroup(viewModel.seriesSecondCycle.await(), item_list_1_title, chipOnClickListener)
+        item_list_1_chips.setupGroup(viewModel.seriesFirstCycle(args.id), item_list_1_title, chipOnClickListener)
+        item_list_2_chips.setupGroup(viewModel.seriesSecondCycle(args.id), item_list_2_title, chipOnClickListener)
     }
 
     private val chipOnClickListener = View.OnClickListener {

@@ -21,9 +21,9 @@ import com.mboasikolopath.ui.main.home.explore.news.NewsViewModel
 import com.mboasikolopath.ui.main.home.explore.news.NewsViewModelFactory
 import com.mboasikolopath.utilities.InsetDecoration
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.Section
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch
 import org.kodein.di.generic.instance
@@ -53,7 +53,7 @@ class HomeFragment : ScopedFragment(), View.OnClickListener {
     private fun buildUI() = launch {
         (activity as MainActivity).hideTabHost(false)
 
-        val newsAdapter = GroupAdapter<ViewHolder>().apply {
+        val newsAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(newsSection)
             setOnItemClickListener(onItemClickListener)
         }

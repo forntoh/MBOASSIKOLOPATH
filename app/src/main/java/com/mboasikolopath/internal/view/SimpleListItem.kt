@@ -6,12 +6,12 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.mboasikolopath.R
 import com.mboasikolopath.utilities.inSp
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 
 data class SimpleListItem(var _id: Int, var text: String, var icon: Int = 0, var drawable: Drawable? = null) : Item() {
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         (viewHolder.itemView as TextView).text = text
 
         if (drawable != null) {

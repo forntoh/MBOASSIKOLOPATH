@@ -44,4 +44,15 @@ class SetupNameFragment : ScopedFragment() {
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("title", titleText)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        val text = savedInstanceState?.getString("title")
+        text?.let { titleText = it }
+        super.onViewStateRestored(savedInstanceState)
+    }
+
 }

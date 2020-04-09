@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.mboasikolopath.data.db.relationships.*
 import com.mboasikolopath.data.model.*
 import com.mboasikolopath.data.model.relationships.*
+import com.mboasikolopath.data.model.relationships.pairs.*
 
 @Database(
     entities = [
@@ -31,7 +32,14 @@ import com.mboasikolopath.data.model.relationships.*
         SeriesSchool::class,
         SeriesSubjectTaught::class
     ],
-    version = 4,
+    views = [
+        CertificateDebouchePair::class,
+        SectionSpecialityPair::class,
+        SeriesJobPair::class,
+        SeriesSchoolPair::class,
+        SeriesSubjectTaughtPair::class
+    ],
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

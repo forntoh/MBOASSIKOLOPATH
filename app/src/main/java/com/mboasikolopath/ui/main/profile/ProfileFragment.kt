@@ -12,8 +12,8 @@ import com.mboasikolopath.R
 import com.mboasikolopath.ui.base.ScopedFragment
 import com.mboasikolopath.utilities.InsetDecoration
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Section
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -55,7 +55,7 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
         }
 
 
-        val detailsAdapter = GroupAdapter<ViewHolder>().apply {
+        val detailsAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(profileDataSection)
         }
         rv_list.apply {

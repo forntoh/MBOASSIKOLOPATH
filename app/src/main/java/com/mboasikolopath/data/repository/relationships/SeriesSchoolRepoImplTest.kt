@@ -1,15 +1,28 @@
 package com.mboasikolopath.data.repository.relationships
 
+import android.util.Log
+import com.google.gson.Gson
 import com.mboasikolopath.data.model.School
 import com.mboasikolopath.data.model.Series
 import com.mboasikolopath.data.model.relationships.SchoolAndItsSeries
 import com.mboasikolopath.data.model.relationships.SeriesAndItsSchools
+import com.mboasikolopath.data.model.relationships.SeriesSchool
 import com.mboasikolopath.data.repository.SchoolRepo
 import com.mboasikolopath.data.repository.SeriesRepo
 
 class SeriesSchoolRepoImplTest(val seriesRepo: SeriesRepo, val schoolRepo: SchoolRepo) : SeriesSchoolRepo() {
 
-    override suspend fun initData() = Unit
+    override suspend fun initData() {
+        val list = mutableListOf<SeriesSchool>()
+        for (i in 0..9) {
+            for (j in 0..9) {
+                list.add(
+                    SeriesSchool(seriesRepo.loadAll()[i].SeriesID, schoolRepo.loadAll()[j].SchoolID)
+                )
+            }
+        }
+        Log.d("TEST", Gson().toJson(list))
+    }
 
     override suspend fun getSeriesAndItsSchools(): List<SeriesAndItsSchools> {
         val list = mutableListOf<SeriesAndItsSchools>()

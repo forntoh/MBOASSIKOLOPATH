@@ -87,7 +87,7 @@ interface ApiService {
 
     companion object {
 
-        private const val BASE_URL = "http://mboaschoolpath.com/public/api/"
+        private const val BASE_URL = "http://mboasikulu.com/public/api/"
 
         operator fun invoke(connectivityInterceptor: ConnectivityInterceptor, appStorage: AppStorage): ApiService {
             val requestInterceptor = Interceptor { chain ->
@@ -104,6 +104,7 @@ interface ApiService {
                     .newBuilder()
                     .addHeader("Accept", "application/json")
                     .addHeader("Connection", "close")
+                    .addHeader("Content-Type", "application/json;charset=utf-8")
                     .url(newUrl)
                     .build()
 

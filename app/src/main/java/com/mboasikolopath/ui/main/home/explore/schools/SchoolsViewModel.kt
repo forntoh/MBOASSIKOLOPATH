@@ -21,7 +21,7 @@ class SchoolsViewModel(private val schoolRepo: SchoolRepo, private val locationR
             GenericListItem(
                 it.SchoolID.toString(),
                 it.Name,
-                locationRepo.findRegionOfLocality(it.LocaliteID).Name
+                locationRepo.findRegionOfLocality(it.LocaliteID)?.Name
             )
         }
     }
@@ -31,7 +31,7 @@ class SchoolsViewModel(private val schoolRepo: SchoolRepo, private val locationR
             GenericListItem(
                 it.SchoolID.toString(),
                 it.Name,
-                locationRepo.findRegionOfLocality(it.LocaliteID).Name
+                locationRepo.findRegionOfLocality(it.LocaliteID)?.Name
             )
         }
     }

@@ -53,8 +53,8 @@ fun getLoadingDialog(context: Context) = MaterialDialog(context).show {
 }
 
 fun ChipGroup.setupGroup(list: List<String>, titleView: TextView?, listener: View.OnClickListener?) {
-    if (!list.isNullOrEmpty()) {
-        // Show chip group if it's empty
+    if (list.isNotEmpty()) {
+        // Show chip group if it's not empty
         if (titleView != null) titleView.visibility = View.VISIBLE
         this.visibility = View.VISIBLE
 

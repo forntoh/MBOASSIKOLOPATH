@@ -4,8 +4,8 @@ import android.widget.LinearLayout
 import com.bumptech.glide.Glide
 import com.mboasikolopath.R
 import com.mboasikolopath.utilities.screenWidth
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_news.view.*
 
 data class NewsItem(
@@ -15,7 +15,7 @@ data class NewsItem(
     var description: String = ""
 ) : Item() {
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         (viewHolder.itemView.news_thumbnail.layoutParams as LinearLayout.LayoutParams).apply {
             height = (screenWidth * (2f / 7f)).toInt()
             width = (screenWidth * (2f / 4f)).toInt()

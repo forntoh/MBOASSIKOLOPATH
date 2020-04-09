@@ -3,7 +3,7 @@ package com.mboasikolopath.ui.login
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity(), OnCompleteListener<AuthResult>, Kodei
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
         job = Job()
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(SetupViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SetupViewModel::class.java)
         bindUI()
     }
 

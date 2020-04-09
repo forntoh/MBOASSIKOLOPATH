@@ -4,7 +4,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.mboasikolopath.data.model.Speciality
 import com.mboasikolopath.data.model.relationships.SectionSpeciality
-import com.mboasikolopath.data.model.relationships.SectionSpecialityPair
+import com.mboasikolopath.data.model.relationships.pairs.SectionSpecialityPair
 import com.mboasikolopath.data.repository.SectionRepo
 import com.mboasikolopath.data.repository.SpecialityRepo
 
@@ -17,7 +17,8 @@ class SectionSpecialityRepoImplTest(val sectionRepo: SectionRepo, val speciality
         for (i in 0..7) {
             for (j in 0..3) {
                 list.add(
-                    SectionSpecialityPair().apply {
+                    SectionSpecialityPair()
+                        .apply {
                         Section = sectionRepo.findBySectionID(i)
                         Speciality = specialityRepo.findBySpecialityID(j)
                     }

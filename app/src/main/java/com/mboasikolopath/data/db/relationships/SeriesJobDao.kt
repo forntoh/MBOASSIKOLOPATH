@@ -15,12 +15,24 @@ interface SeriesJobDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg SeriesJobs: SeriesJob)
 
-    @Query("SELECT Series.SeriesID as Series_SeriesID, Series.Name as Series_Name, Series.Cycle as Series_Cycle, Series.SpecialityID as Series_SpecialityID, Job.* FROM Series LEFT OUTER JOIN SeriesJob on SeriesJob.SeriesID = Series.SeriesID INNER JOIN Job on SeriesJob.JobID = Job.JobID")
+    @Query("SELECT * FROM SeriesJobPair")
     fun findSeriesAndJobPairs(): List<SeriesJobPair>
 
-    @Query("SELECT Job.* FROM Series LEFT OUTER JOIN SeriesJob on SeriesJob.SeriesID = Series.SeriesID LEFT OUTER JOIN Job on SeriesJob.JobID = Job.JobID WHERE SeriesJob.SeriesID = :id")
+    @Query(
+        """
+        SELECT s.JobID, s.Name
+        FROM SeriesJobPair as s
+        WHERE s.Series_SeriesID = :id
+         """
+    )
     fun findJobsBySeriesID(id: String): List<Job>
 
-    @Query("SELECT Series.* FROM Job LEFT OUTER JOIN SeriesJob on SeriesJob.SeriesID = Job.JobID LEFT OUTER JOIN Series on SeriesJob.SeriesID = Series.SeriesID WHERE SeriesJob.JobID = :id")
+    @Query(
+        """
+        SELECT s.Series_SeriesID as SeriesID, s.Series_Name as Name, s.Series_Cycle as Cycle, s.Series_SpecialityID as SpecialityID
+        FROM  SeriesJobPair as s
+        WHERE s.JobID = :id
+        """
+    )
     fun findSeriesByJobID(id: Int): List<Series>
 }

@@ -11,7 +11,7 @@ interface LocaliteDao: BaseDao<Localite> {
     fun loadAll(): List<Localite>
 
     @Query("SELECT * FROM Localite WHERE LocaliteID LIKE :id LIMIT 1")
-    fun findByLocaliteID(id: Int): Localite
+    fun findByLocaliteID(id: Int): Localite?
 
     @Query("SELECT * FROM Localite WHERE ArrondissementID LIKE :id")
     fun findLocalitesOfArrondissement(id: Int): List<Localite>

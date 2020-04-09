@@ -22,7 +22,7 @@ class ProfileViewModel(
         val gender = if (user.Gender == "M") "Male" else "Female"
         val dob = user.Dob ?: ""
 
-        val localite = locationRepo.findByLocaliteID(user.LocaliteID)
+        val localite = locationRepo.findByLocaliteID(user.LocaliteID) ?: return emptyList()
         val arrondissement = locationRepo.findByArrondissementID(localite.ArrondissementID)
         val departement = locationRepo.findByArrondissementID(arrondissement.ArrondissementID)
         val region = locationRepo.findByDepartementID(departement.DepartementID)

@@ -4,7 +4,7 @@ import com.mboasikolopath.data.db.relationships.SeriesSchoolDao
 import com.mboasikolopath.data.model.relationships.SchoolAndItsSeries
 import com.mboasikolopath.data.model.relationships.SeriesAndItsSchools
 import com.mboasikolopath.data.model.relationships.SeriesSchool
-import com.mboasikolopath.data.model.relationships.SeriesSchoolPair
+import com.mboasikolopath.data.model.relationships.pairs.SeriesSchoolPair
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
@@ -48,13 +48,13 @@ class SeriesSchoolRepoImpl(
         return data
     }
 
-    override suspend fun getSeriesAndItsSchools() = withContext(Dispatchers.IO) {
+    override suspend fun getSeriesAndItsSchools(): List<SeriesAndItsSchools> = withContext(Dispatchers.IO) {
         val data = loadData()
         return@withContext if (!data.isNullOrEmpty()) SeriesSchool.groupSchools(data)
         else emptyList<SeriesAndItsSchools>()
     }
 
-    override suspend fun getSchoolAndItsSeries() = withContext(Dispatchers.IO) {
+    override suspend fun getSchoolAndItsSeries(): List<SchoolAndItsSeries> = withContext(Dispatchers.IO) {
         val data = loadData()
         return@withContext if (!data.isNullOrEmpty()) SeriesSchool.groupSeries(data)
         else emptyList<SchoolAndItsSeries>()

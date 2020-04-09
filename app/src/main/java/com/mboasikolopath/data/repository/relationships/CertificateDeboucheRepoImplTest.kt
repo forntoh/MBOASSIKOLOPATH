@@ -4,7 +4,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.mboasikolopath.data.model.Debouche
 import com.mboasikolopath.data.model.relationships.CertificateDebouche
-import com.mboasikolopath.data.model.relationships.CertificateDebouchePair
+import com.mboasikolopath.data.model.relationships.pairs.CertificateDebouchePair
 import com.mboasikolopath.data.repository.CertificateRepo
 import com.mboasikolopath.data.repository.DeboucheRepo
 
@@ -17,7 +17,8 @@ class CertificateDeboucheRepoImplTest(val certificateRepo: CertificateRepo, val 
         for (i in 0..5) {
             for (j in 0..5) {
                 list.add(
-                    CertificateDebouchePair().apply {
+                    CertificateDebouchePair()
+                        .apply {
                         Certificate = certificateRepo.loadAll()[i]
                         Debouche = deboucheRepo.findByDeboucheID(j)
                     }

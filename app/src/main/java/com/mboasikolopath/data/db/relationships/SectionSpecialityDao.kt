@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.mboasikolopath.data.model.Speciality
 import com.mboasikolopath.data.model.relationships.SectionSpeciality
-import com.mboasikolopath.data.model.relationships.SectionSpecialityPair
+import com.mboasikolopath.data.model.relationships.pairs.SectionSpecialityPair
 
 @Dao
 interface SectionSpecialityDao {
@@ -14,9 +14,15 @@ interface SectionSpecialityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg SectionSpecialities: SectionSpeciality)
 
-    @Query("SELECT Section.SectionID as Section_SectionID, Section.Description as Section_Description, Section.LongDescription as Section_LongDescription, Section.EducationID as Section_EducationID, Speciality.* FROM Section LEFT OUTER JOIN SectionSpeciality on SectionSpeciality.SectionID = Section.SectionID INNER JOIN Speciality on SectionSpeciality.SpecialityID = Speciality.SpecialityID")
+    @Query("SELECT * FROM SectionSpecialityPair")
     fun findSectionAndSpecialityPairs(): List<SectionSpecialityPair>
 
-    @Query("SELECT Speciality.* FROM Section LEFT OUTER JOIN SectionSpeciality on SectionSpeciality.SectionID = Section.SectionID LEFT OUTER JOIN Speciality on SectionSpeciality.SpecialityID = Speciality.SpecialityID WHERE SectionSpeciality.SectionID = :id")
+    @Query(
+        """
+        SELECT s.SpecialityID, s.Description
+        FROM SectionSpecialityPair as s
+        WHERE s.Section_SectionID = :id
+        """
+    )
     fun findSpecialitiesBySectionID(id: Int): List<Speciality>
 }
