@@ -32,7 +32,7 @@ import org.kodein.di.generic.singleton
 class App : MultiDexApplication(), KodeinAware {
 
     companion object {
-        const val MODE = "Pro"
+        const val MODE = "Dev"
     }
 
     override val kodein = Kodein.lazy {

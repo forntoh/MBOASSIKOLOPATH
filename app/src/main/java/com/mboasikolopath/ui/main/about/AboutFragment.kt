@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +35,7 @@ class AboutFragment : ScopedFragment() {
     }
 
     private fun bindUI() = launch {
-        tv_about.text = viewModel.about
+        tv_about.text = HtmlCompat.fromHtml(getString(R.string.about_us, getString(R.string.app_name)), HtmlCompat.FROM_HTML_MODE_COMPACT)
 
         val contactsAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(simpleContactsSection)

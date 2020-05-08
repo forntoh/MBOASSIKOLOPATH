@@ -117,6 +117,7 @@ interface ApiService {
                 .writeTimeout(1, TimeUnit.MINUTES)
                 .addInterceptor(requestInterceptor)
                 .addInterceptor(connectivityInterceptor)
+                .addInterceptor(RetryInterceptor())
                 .build()
 
             return Retrofit.Builder()

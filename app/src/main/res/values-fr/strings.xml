@@ -49,4 +49,5 @@
     <string name="after_high">Apres le deuxieme cycle du secondaire general et technique\n(GCE A-Level/BAC)</string>
     <string name="series_first_cycle">Filières 1er cycle</string>
     <string name="series_second_cycle">Filières  2eme cycle</string>
+    <string name="about_us"><b>%1$s</b> est une application mobile qui permettra aux élèves, issus du primaire et du premier cycle du secondaire général et technique du Cameroun de s’informer sur les filières d’études et leurs spécificités en vue d’élaborer par eux-mêmes des projets d’orientation scolaire et professionnelle individuellement épanouissants et socialement rentables. Il s’agit en effet d’un système expert, semi-automatisé qui, grâce à un moteur d’inférence/moteur de calcul, permettra à l’utilisateur de formuler une juste orientation scolaire et plus tard professionnelle</string>
 </resources>

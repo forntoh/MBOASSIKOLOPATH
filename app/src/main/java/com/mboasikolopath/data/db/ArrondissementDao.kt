@@ -13,7 +13,7 @@ interface ArrondissementDao: BaseDao<Arrondissement> {
     @Query("SELECT * FROM Arrondissement WHERE ArrondissementID LIKE :id LIMIT 1")
     fun findByArrondissementID(id: Int): Arrondissement
 
-    @Query("SELECT * FROM Arrondissement WHERE DepartementID LIKE :id LIMIT 1")
+    @Query("SELECT * FROM Arrondissement WHERE DepartementID LIKE :id")
     fun findArrondissementsOfDepartement(id: Int): List<Arrondissement>
 
     @Query("SELECT COUNT(ArrondissementID) FROM Arrondissement")

@@ -53,7 +53,7 @@ class LoginActivity : AppCompatActivity(), OnCompleteListener<AuthResult>, Kodei
     private lateinit var googleSignInClient: GoogleSignInClient
 
     private lateinit var viewModel: SetupViewModel
-    private val viewModelFactory: SetupViewModelFactory by instance()
+    private val viewModelFactory: SetupViewModelFactory by instance<SetupViewModelFactory>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -136,7 +136,6 @@ class LoginActivity : AppCompatActivity(), OnCompleteListener<AuthResult>, Kodei
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        //TODO: Change behavior
         if (user == null) return
 
         val userAsync = viewModel.getUserAsync()
