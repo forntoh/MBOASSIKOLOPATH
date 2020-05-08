@@ -197,6 +197,6 @@ class AppDataSourceImpl(private val apiService: ApiService) : AppDataSource {
         } catch (e: EOFException) {
             Log.e("EOFException", "${e.message}", e)
         }
-        return null
+        return emptyList<T>() as T
     }
 }
