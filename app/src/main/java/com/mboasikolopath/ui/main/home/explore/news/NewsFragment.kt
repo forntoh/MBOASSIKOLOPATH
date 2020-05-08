@@ -18,7 +18,7 @@ class NewsFragment : ScopedFragment() {
     private val args: NewsFragmentArgs by navArgs()
 
     private lateinit var newsViewModel: NewsViewModel
-    private val newsViewModelFactory: NewsViewModelFactory by instance()
+    private val newsViewModelFactory: NewsViewModelFactory by instance<NewsViewModelFactory>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

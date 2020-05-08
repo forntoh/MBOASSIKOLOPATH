@@ -25,7 +25,7 @@ import org.kodein.di.generic.instance
 
 class SectorFragment : ScopedFragment() {
 
-    private val viewModelFactory: SectorViewModelFactory by instance()
+    private val viewModelFactory: SectorViewModelFactory by instance<SectorViewModelFactory>()
 
     private lateinit var viewModel: SectorViewModel
 

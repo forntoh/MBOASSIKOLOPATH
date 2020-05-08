@@ -24,7 +24,7 @@ import org.kodein.di.generic.instance
 
 class SchoolFragment : ScopedFragment() {
 
-    private val viewModelFactory: SchoolViewModelFactory by instance()
+    private val viewModelFactory: SchoolViewModelFactory by instance<SchoolViewModelFactory>()
 
     private val args: SchoolFragmentArgs by navArgs()
 

@@ -29,7 +29,7 @@ import org.kodein.di.generic.instance
 
 class JobsFragment : ScopedFragment() {
 
-    private val viewModelFactory: JobsViewModelFactory by instance()
+    private val viewModelFactory: JobsViewModelFactory by instance<JobsViewModelFactory>()
 
     private lateinit var viewModel: JobsViewModel
     private lateinit var jobs: List<GenericListItem>

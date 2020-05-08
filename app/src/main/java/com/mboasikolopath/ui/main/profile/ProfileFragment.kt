@@ -24,7 +24,7 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
 
     override val kodein by closestKodein()
 
-    private val viewModelFactory: ProfileViewModelFactory by instance()
+    private val viewModelFactory: ProfileViewModelFactory by instance<ProfileViewModelFactory>()
 
     private val profileDataSection = Section()
 

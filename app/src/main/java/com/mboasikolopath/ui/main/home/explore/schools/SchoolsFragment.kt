@@ -31,7 +31,7 @@ import org.kodein.di.generic.instance
 
 class SchoolsFragment : ScopedFragment() {
 
-    private val viewModelFactory: SchoolsViewModelFactory by instance()
+    private val viewModelFactory: SchoolsViewModelFactory by instance<SchoolsViewModelFactory>()
 
     private lateinit var viewModel: SchoolsViewModel
     private lateinit var schools: List<GenericListItem>

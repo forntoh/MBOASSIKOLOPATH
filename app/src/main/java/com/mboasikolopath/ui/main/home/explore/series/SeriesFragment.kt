@@ -20,7 +20,7 @@ import org.kodein.di.generic.instance
 
 class SeriesFragment : ScopedFragment() {
 
-    private val viewModelFactory: SeriesViewModelFactory by instance()
+    private val viewModelFactory: SeriesViewModelFactory by instance<SeriesViewModelFactory>()
 
     private val args: SeriesFragmentArgs by navArgs()
 
