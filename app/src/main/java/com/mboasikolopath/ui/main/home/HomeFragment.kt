@@ -31,10 +31,10 @@ import org.kodein.di.generic.instance
 class HomeFragment : ScopedFragment(), View.OnClickListener {
 
     private lateinit var newsViewModel: NewsViewModel
-    private val newsViewModelFactory: NewsViewModelFactory by instance()
+    private val newsViewModelFactory: NewsViewModelFactory by instance<NewsViewModelFactory>()
 
     private lateinit var viewModelSetup: SetupViewModel
-    private val setupViewModelFactory: SetupViewModelFactory by instance()
+    private val setupViewModelFactory: SetupViewModelFactory by instance<SetupViewModelFactory>()
 
     private val newsSection = Section()
 
@@ -67,7 +67,6 @@ class HomeFragment : ScopedFragment(), View.OnClickListener {
         btn_schools.setOnClickListener(this@HomeFragment)
         btn_jobs.setOnClickListener(this@HomeFragment)
         btn_sector.setOnClickListener(this@HomeFragment)
-        btn_series.setOnClickListener(this@HomeFragment)
 
         button_after_primary.setOnClickListener(this@HomeFragment)
         button_after_secondary.setOnClickListener(this@HomeFragment)
