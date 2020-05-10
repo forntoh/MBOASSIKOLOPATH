@@ -15,9 +15,9 @@ import java.net.SocketTimeoutException
 
 class AppDataSourceImpl(private val apiService: ApiService) : AppDataSource {
 
-    private val _downloadedCertificateDebouches = MutableLiveData<List<CertificateDebouche>>()
-    override val downloadedCertificateDebouches: LiveData<List<CertificateDebouche>>
-        get() = _downloadedCertificateDebouches
+    private val _downloadedDebouchesSeries = MutableLiveData<List<DeboucheSeries>>()
+    override val downloadedDebouchesSeries: LiveData<List<DeboucheSeries>>
+        get() = _downloadedDebouchesSeries
 
     private val _downloadedSectionSpecialities = MutableLiveData<List<SectionSpeciality>>()
     override val downloadedSectionSpecialities: LiveData<List<SectionSpeciality>>
@@ -95,7 +95,7 @@ class AppDataSourceImpl(private val apiService: ApiService) : AppDataSource {
         get() = _downloadedUser
 
     override suspend fun certificateDebouches() =
-        _downloadedCertificateDebouches.postValue(apiCover { apiService.certificateDebouches.awaitResponse() })
+        _downloadedDebouchesSeries.postValue(apiCover { apiService.debouchesSeries.awaitResponse() })
 
     override suspend fun sectionSpecialities() =
         _downloadedSectionSpecialities.postValue(apiCover { apiService.sectionSpecialities.awaitResponse() })

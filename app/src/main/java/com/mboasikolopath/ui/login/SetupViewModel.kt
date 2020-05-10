@@ -20,8 +20,8 @@ class SetupViewModel(
     private val certificateRepo: CertificateRepo,
     private val schoolRepo: SchoolRepo,
     private val sectionRepo: SectionRepo,
-    
-    private val certificateDeboucheRepo: CertificateDeboucheRepo,
+
+    private val deboucheSeriesRepo: DeboucheSeriesRepo,
     private val sectionSpecialityRepo: SectionSpecialityRepo,
     private val seriesJobRepo: SeriesJobRepo,
     private val seriesSchoolRepo: SeriesSchoolRepo,
@@ -42,7 +42,7 @@ class SetupViewModel(
         schoolRepo.scope = viewModelScope
         sectionRepo.scope = viewModelScope
         
-        certificateDeboucheRepo.scope = viewModelScope
+        deboucheSeriesRepo.scope = viewModelScope
         sectionSpecialityRepo.scope = viewModelScope
         seriesJobRepo.scope = viewModelScope
         seriesSchoolRepo.scope = viewModelScope
@@ -62,7 +62,7 @@ class SetupViewModel(
         schoolRepo.initData()
         sectionRepo.initData()
         
-        certificateDeboucheRepo.initData()
+        deboucheSeriesRepo.initData()
         sectionSpecialityRepo.initData()
         seriesJobRepo.initData()
         seriesSchoolRepo.initData()

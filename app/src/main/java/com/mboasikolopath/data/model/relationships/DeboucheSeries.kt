@@ -24,8 +24,8 @@ import com.mboasikolopath.data.model.relationships.pairs.DeboucheSeriesPair
     indices = [Index(value = ["DeboucheID", "SeriesID"], unique = true)]
 )
 data class DeboucheSeries(
-    @ColumnInfo var DeboucheID: String,
-    @ColumnInfo var SeriesID: Int
+    @ColumnInfo var DeboucheID: Int,
+    @ColumnInfo var SeriesID: String
 ) {
     companion object {
         fun groupSeries(DeboucheSeriesList: List<DeboucheSeriesPair>): MutableList<DeboucheAndItsSeries> {

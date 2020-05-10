@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.mboasikolopath.data.repository.CertificateRepo
 import com.mboasikolopath.data.repository.LocationRepo
 import com.mboasikolopath.data.repository.SeriesRepo
-import com.mboasikolopath.data.repository.relationships.CertificateDeboucheRepo
+import com.mboasikolopath.data.repository.relationships.DeboucheSeriesRepo
 import com.mboasikolopath.data.repository.relationships.SeriesJobRepo
 import com.mboasikolopath.data.repository.relationships.SeriesSchoolRepo
 import com.mboasikolopath.data.repository.relationships.SeriesSubjectTaughtRepo
@@ -19,7 +19,7 @@ class SeriesViewModel(
     private val cycle: Int,
     private val seriesRepo: SeriesRepo,
     private val certificateRepo: CertificateRepo,
-    private val certificateDeboucheRepo: CertificateDeboucheRepo,
+    private val deboucheSeriesRepo: DeboucheSeriesRepo,
     private val seriesSubjectTaughtRepo: SeriesSubjectTaughtRepo,
     private val seriesJobRepo: SeriesJobRepo,
     private val seriesSchoolRepo: SeriesSchoolRepo,
@@ -29,7 +29,7 @@ class SeriesViewModel(
     init {
         seriesRepo.scope = viewModelScope
         certificateRepo.scope = viewModelScope
-        certificateDeboucheRepo.scope = viewModelScope
+        deboucheSeriesRepo.scope = viewModelScope
         seriesSubjectTaughtRepo.scope = viewModelScope
         seriesJobRepo.scope = viewModelScope
         seriesSchoolRepo.scope = viewModelScope
@@ -70,10 +70,8 @@ class SeriesViewModel(
     }
 
     val debouches by lazyDeferred {
-        certificateRepo.findCertificateForSeriesOfCycle(seriesId, cycle)?.CertificateID?.let { it ->
-            certificateDeboucheRepo.findDebouchesByCertificateID(it).map {
-                it.Name
-            }
+        deboucheSeriesRepo.findDebouchesBySeriesID(seriesId, cycle).map {
+            it.Name
         }
     }
 

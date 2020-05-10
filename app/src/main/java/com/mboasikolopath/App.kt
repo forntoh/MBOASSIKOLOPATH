@@ -49,7 +49,7 @@ class App : MultiDexApplication(), KodeinAware {
         bind() from singleton { ApiService(instance(), instance()) }
 
         // Relationships
-        bind<CertificateDeboucheDao>() with singleton { instance<AppDatabase>().certificateDeboucheDao() }
+        bind<DeboucheSeriesDao>() with singleton { instance<AppDatabase>().deboucheSeriesDao() }
         bind<SectionSpecialityDao>() with singleton { instance<AppDatabase>().sectionSpecialityDao() }
         bind<SeriesJobDao>() with singleton { instance<AppDatabase>().seriesJobDao() }
         bind<SeriesSchoolDao>() with singleton { instance<AppDatabase>().seriesSchoolDao() }
@@ -74,7 +74,7 @@ class App : MultiDexApplication(), KodeinAware {
         when(MODE) {
             "Dev" -> {
                 // Relationships
-                bind<CertificateDeboucheRepo>() with singleton { CertificateDeboucheRepoImplTest(instance(), instance()) }
+                bind<DeboucheSeriesRepo>() with singleton { DeboucheSeriesRepoImplTest(instance(), instance()) }
                 bind<SectionSpecialityRepo>() with singleton { SectionSpecialityRepoImplTest(instance(), instance()) }
                 bind<SeriesJobRepo>() with singleton { SeriesJobRepoImplTest(instance(), instance()) }
                 bind<SeriesSchoolRepo>() with singleton { SeriesSchoolRepoImplTest(instance(), instance()) }
@@ -95,7 +95,7 @@ class App : MultiDexApplication(), KodeinAware {
             }
             "Pro" -> {
                 // Relationships
-                bind<CertificateDeboucheRepo>() with singleton { CertificateDeboucheRepoImpl(instance(), instance(), instance()) }
+                bind<DeboucheSeriesRepo>() with singleton { DeboucheSeriesRepoImpl(instance(), instance(), instance()) }
                 bind<SectionSpecialityRepo>() with singleton { SectionSpecialityRepoImpl(instance(), instance(), instance()) }
                 bind<SeriesJobRepo>() with singleton { SeriesJobRepoImpl(instance(), instance(), instance()) }
                 bind<SeriesSchoolRepo>() with singleton { SeriesSchoolRepoImpl(instance(), instance(), instance()) }

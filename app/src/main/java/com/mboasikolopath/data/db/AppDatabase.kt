@@ -4,10 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.mboasikolopath.data.db.relationships.SectionSpecialityDao
-import com.mboasikolopath.data.db.relationships.SeriesJobDao
-import com.mboasikolopath.data.db.relationships.SeriesSchoolDao
-import com.mboasikolopath.data.db.relationships.SeriesSubjectTaughtDao
+import com.mboasikolopath.data.db.relationships.*
 import com.mboasikolopath.data.model.*
 import com.mboasikolopath.data.model.relationships.*
 import com.mboasikolopath.data.model.relationships.pairs.*
@@ -47,7 +44,7 @@ import com.mboasikolopath.data.model.relationships.pairs.*
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun certificateDeboucheDao(): DeboucheDao
+    abstract fun deboucheSeriesDao(): DeboucheSeriesDao
     abstract fun sectionSpecialityDao(): SectionSpecialityDao
     abstract fun seriesJobDao(): SeriesJobDao
     abstract fun seriesSchoolDao(): SeriesSchoolDao

@@ -16,19 +16,20 @@ interface DeboucheSeriesDao : BaseDao<DeboucheSeries> {
 
     @Query(
         """
-        SELECT s.SeriesID as SeriesID, s.Name as Name, s.Cycle as Cycle, s.SpecialityID as SpecialityID
+        SELECT s.SeriesID, s.Name, s.Cycle, s.SpecialityID
         FROM DeboucheSeriesPair as s
         WHERE s.Debouche_DeboucheID = :id
         """
     )
-    fun findSeriessByDeboucheID(id: Int): List<Series>
+    fun findSeriesByDeboucheID(id: Int): List<Series>
 
     @Query(
         """
-        SELECT s.Debouche_DeboucheID, s.Debouche_Name
+        SELECT s.Debouche_DeboucheID as DeboucheID, s.Debouche_Name as Name
         FROM DeboucheSeriesPair as s
         WHERE s.SeriesID = :id
+        AND s.Cycle = :cycle
         """
     )
-    fun findDebouchesBySeriesID(id: Int): List<Debouche>
+    fun findDebouchesBySeriesID(id: String, cycle: Int): List<Debouche>
 }

@@ -18,8 +18,8 @@ import java.util.concurrent.TimeUnit
 
 interface ApiService {
 
-    @get:GET("pair/certificate-debouches")
-    val certificateDebouches: Call<List<CertificateDebouche>>
+    @get:GET("pair/debouche-series")
+    val debouchesSeries: Call<List<DeboucheSeries>>
 
     @get:GET("pair/section-specialities")
     val sectionSpecialities: Call<List<SectionSpeciality>>

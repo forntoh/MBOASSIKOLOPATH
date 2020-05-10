@@ -19,7 +19,7 @@ class SetupViewModelFactory(
     private val schoolRepo: SchoolRepo,
     private val sectionRepo: SectionRepo,
 
-    private val certificateDeboucheRepo: CertificateDeboucheRepo,
+    private val deboucheSeriesRepo: DeboucheSeriesRepo,
     private val sectionSpecialityRepo: SectionSpecialityRepo,
     private val seriesJobRepo: SeriesJobRepo,
     private val seriesSchoolRepo: SeriesSchoolRepo,
@@ -40,7 +40,7 @@ class SetupViewModelFactory(
             certificateRepo,
             schoolRepo,
             sectionRepo,
-            certificateDeboucheRepo,
+            deboucheSeriesRepo,
             sectionSpecialityRepo,
             seriesJobRepo,
             seriesSchoolRepo,

@@ -6,7 +6,7 @@ import com.mboasikolopath.data.model.relationships.*
 
 interface AppDataSource {
 
-    val downloadedCertificateDebouches: LiveData<List<CertificateDebouche>>
+    val downloadedDebouchesSeries: LiveData<List<DeboucheSeries>>
     val downloadedSectionSpecialities: LiveData<List<SectionSpeciality>>
     val downloadedSeriesJobs: LiveData<List<SeriesJob>>
     val downloadedSeriesSchools: LiveData<List<SeriesSchool>>
