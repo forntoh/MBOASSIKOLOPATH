@@ -4,7 +4,6 @@ import android.util.Log
 import com.google.gson.Gson
 import com.mboasikolopath.data.model.Debouche
 import com.mboasikolopath.data.model.relationships.CertificateDebouche
-import com.mboasikolopath.data.model.relationships.pairs.CertificateDebouchePair
 import com.mboasikolopath.data.repository.CertificateRepo
 import com.mboasikolopath.data.repository.DeboucheRepo
 

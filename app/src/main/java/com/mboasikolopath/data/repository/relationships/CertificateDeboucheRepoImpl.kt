@@ -1,14 +1,11 @@
 package com.mboasikolopath.data.repository.relationships
 
-import com.mboasikolopath.data.db.relationships.CertificateDeboucheDao
 import com.mboasikolopath.data.model.relationships.CertificateDebouche
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class CertificateDeboucheRepoImpl(
