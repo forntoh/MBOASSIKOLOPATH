@@ -25,13 +25,14 @@ class CertificateRepoImpl(
         }
     }
 
-    private suspend fun saveCertificates(certificates: List<Certificate>) =
+    private suspend fun saveCertificates(certificates: List<Certificate>) {
         certificateDao.insertAll(*certificates.toTypedArray())
+        appStorage.setLastSaved(DataKey.CERTIFICATES, ZonedDateTime.now())
+    }
 
     private suspend fun initCertificatesData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.CERTIFICATES))) {
             appDataSource.certificates()
-            appStorage.setLastSaved(DataKey.CERTIFICATES, ZonedDateTime.now())
         }
     }
 

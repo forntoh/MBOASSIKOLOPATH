@@ -25,13 +25,14 @@ class EducationRepoImpl(
         }
     }
 
-    private suspend fun saveEducations(educations: List<Education>) =
+    private suspend fun saveEducations(educations: List<Education>) {
         educationDao.insertAll(*educations.toTypedArray())
+        appStorage.setLastSaved(DataKey.EDUCATIONS, ZonedDateTime.now())
+    }
 
     private suspend fun initEducationsData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.EDUCATIONS))) {
             appDataSource.educations()
-            appStorage.setLastSaved(DataKey.EDUCATIONS, ZonedDateTime.now())
         }
     }
 

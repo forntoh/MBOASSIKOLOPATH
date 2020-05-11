@@ -25,13 +25,14 @@ class SeriesSubjectTaughtRepoImpl(
         }
     }
 
-    private suspend fun saveSeriesSubjectsTaught(seriesSubjectsTaught: List<SeriesSubjectTaught>) =
+    private suspend fun saveSeriesSubjectsTaught(seriesSubjectsTaught: List<SeriesSubjectTaught>) {
         seriesSubjectTaughtDao.insertAll(*seriesSubjectsTaught.toTypedArray())
+        appStorage.setLastSaved(DataKey.SERIES_SUBJECTS_TAUGHT, ZonedDateTime.now())
+    }
 
     private suspend fun initSeriesSubjectTaughtData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.SERIES_SUBJECTS_TAUGHT))) {
             appDataSource.seriesSubjectsTaught()
-            appStorage.setLastSaved(DataKey.SERIES_SUBJECTS_TAUGHT, ZonedDateTime.now())
         }
     }
 

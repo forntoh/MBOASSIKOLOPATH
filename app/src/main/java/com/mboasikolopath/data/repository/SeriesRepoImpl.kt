@@ -23,13 +23,14 @@ class SeriesRepoImpl(
         }
     }
 
-    private suspend fun saveSeries(series: List<Series>) =
+    private suspend fun saveSeries(series: List<Series>) {
         seriesDao.insertAll(*series.toTypedArray())
+        appStorage.setLastSaved(DataKey.SERIES, ZonedDateTime.now())
+    }
 
     private suspend fun initSeriesData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.SERIES))) {
             appDataSource.series()
-            appStorage.setLastSaved(DataKey.SERIES, ZonedDateTime.now())
         }
     }
 

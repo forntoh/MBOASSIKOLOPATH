@@ -1,9 +1,9 @@
 package com.mboasikolopath.data.model.relationships
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
+import com.google.gson.annotations.SerializedName
 import com.mboasikolopath.data.model.Debouche
 import com.mboasikolopath.data.model.Series
 import com.mboasikolopath.data.model.relationships.pairs.DeboucheSeriesPair
@@ -24,8 +24,8 @@ import com.mboasikolopath.data.model.relationships.pairs.DeboucheSeriesPair
     indices = [Index(value = ["DeboucheID", "SeriesID"], unique = true)]
 )
 data class DeboucheSeries(
-    @ColumnInfo var DeboucheID: Int,
-    @ColumnInfo var SeriesID: String
+    @SerializedName("deboucheid") var DeboucheID: Int,
+    @SerializedName("seriesid") var SeriesID: String
 ) {
     companion object {
         fun groupSeries(DeboucheSeriesList: List<DeboucheSeriesPair>): MutableList<DeboucheAndItsSeries> {

@@ -14,6 +14,7 @@ import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
 import com.mboasikolopath.utilities.isFetchNeeded
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
@@ -28,9 +29,9 @@ class LocationRepoImpl(
 ) : LocationRepo() {
 
     override suspend fun initData() {
-        initRegionsData()
-        initDepartementsData()
-        initArrondissementsData()
+        initRegionsData(); delay(5000)
+        initDepartementsData(); delay(5000)
+        initArrondissementsData(); delay(5000)
         initLocalitiesData()
     }
 
@@ -56,40 +57,40 @@ class LocationRepoImpl(
 
     private suspend fun saveLocationData() {
         regionDao.insertAll(*regions.toTypedArray())
+        appStorage.setLastSaved(DataKey.REGIONS, ZonedDateTime.now())
         Log.d("TOM", "Saved regions.........................!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         departementDao.insertAll(*departements.toTypedArray())
+        appStorage.setLastSaved(DataKey.DEPARTEMENTS, ZonedDateTime.now())
         Log.d("TOM", "Saved departements....................!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         arrondissementDao.insertAll(*arrondissements.toTypedArray())
+        appStorage.setLastSaved(DataKey.ARRONDISSEMENTS, ZonedDateTime.now())
         Log.d("TOM", "Saved arrondissements.................!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         localiteDao.insertAll(*localites.toTypedArray())
+        appStorage.setLastSaved(DataKey.LOCALITIES, ZonedDateTime.now())
         Log.d("TOM", "Saved localites.......................!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     private suspend fun initLocalitiesData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.LOCALITIES)) || localiteDao.numberOfItems() <= 0) {
             appDataSource.localities()
-            appStorage.setLastSaved(DataKey.LOCALITIES, ZonedDateTime.now())
         }
     }
 
     private suspend fun initArrondissementsData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.ARRONDISSEMENTS)) || arrondissementDao.numberOfItems() <= 0) {
             appDataSource.arrondissements()
-            appStorage.setLastSaved(DataKey.ARRONDISSEMENTS, ZonedDateTime.now())
         }
     }
 
     private suspend fun initDepartementsData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.DEPARTEMENTS)) || departementDao.numberOfItems() <= 0) {
             appDataSource.departements()
-            appStorage.setLastSaved(DataKey.DEPARTEMENTS, ZonedDateTime.now())
         }
     }
 
     private suspend fun initRegionsData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.REGIONS)) || regionDao.numberOfItems() <= 0) {
             appDataSource.regions()
-            appStorage.setLastSaved(DataKey.REGIONS, ZonedDateTime.now())
         }
     }
 

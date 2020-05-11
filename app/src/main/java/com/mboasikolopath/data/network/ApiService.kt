@@ -87,7 +87,7 @@ interface ApiService {
 
     companion object {
 
-        private const val BASE_URL = "http://mboasikulu.com/public/api/"
+        private const val BASE_URL = "http://mboasikolopath.herokuapp.com/public/api/"
 
         operator fun invoke(connectivityInterceptor: ConnectivityInterceptor, appStorage: AppStorage): ApiService {
             val requestInterceptor = Interceptor { chain ->
@@ -103,8 +103,8 @@ interface ApiService {
                 val request = originalRequest
                     .newBuilder()
                     .addHeader("Accept", "application/json")
-                    .addHeader("Connection", "close")
-                    .addHeader("Content-Type", "application/json;charset=utf-8")
+                    .addHeader("Connection", "Keep-Alive")
+                    .addHeader("Content-Type", "application/json")
                     .url(newUrl)
                     .build()
 
@@ -118,10 +118,11 @@ interface ApiService {
                 .addInterceptor(requestInterceptor)
                 .addInterceptor(connectivityInterceptor)
                 .addInterceptor(RetryInterceptor())
+                .retryOnConnectionFailure(true)
                 .build()
 
             return Retrofit.Builder()
-                .client(okHttpClient)
+                .client(okHttpClient.apply { dispatcher().maxRequests = 100 })
                 .baseUrl(BASE_URL)
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))

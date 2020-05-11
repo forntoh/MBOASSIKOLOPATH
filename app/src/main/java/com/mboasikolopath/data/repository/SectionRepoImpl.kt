@@ -23,13 +23,14 @@ class SectionRepoImpl(
         }
     }
 
-    private suspend fun saveSections(sections: List<Section>) =
+    private suspend fun saveSections(sections: List<Section>) {
         sectionDao.insertAll(*sections.toTypedArray())
+        appStorage.setLastSaved(DataKey.SECTIONS, ZonedDateTime.now())
+    }
 
     private suspend fun initSectionsData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.SECTIONS))) {
             appDataSource.sections()
-            appStorage.setLastSaved(DataKey.SECTIONS, ZonedDateTime.now())
         }
     }
 

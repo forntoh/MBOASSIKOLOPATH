@@ -23,9 +23,9 @@ import com.google.gson.annotations.SerializedName
     ]
 )
 data class Certificate(
-    @PrimaryKey
     @SerializedName("certificateid") var CertificateID: String,
 
+    @PrimaryKey
     @SerializedName("seriesid") var SeriesID: String
     /*var UserID: Int*/
 )

@@ -28,13 +28,14 @@ class SeriesJobRepoImpl(
         }
     }
 
-    private suspend fun saveSeriesJobs(seriesJobs: List<SeriesJob>) =
+    private suspend fun saveSeriesJobs(seriesJobs: List<SeriesJob>) {
         seriesJobDao.insertAll(*seriesJobs.toTypedArray())
+        appStorage.setLastSaved(DataKey.SERIES_JOBS, ZonedDateTime.now())
+    }
 
     private suspend fun initSeriesJobData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.SERIES_JOBS))) {
             appDataSource.seriesJobs()
-            appStorage.setLastSaved(DataKey.SERIES_JOBS, ZonedDateTime.now())
         }
     }
 

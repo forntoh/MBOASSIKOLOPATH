@@ -25,13 +25,14 @@ class DeboucheRepoImpl(
         }
     }
 
-    private suspend fun saveDebouches(debouches: List<Debouche>) =
+    private suspend fun saveDebouches(debouches: List<Debouche>) {
         deboucheDao.insertAll(*debouches.toTypedArray())
+        appStorage.setLastSaved(DataKey.DEBOUCHES, ZonedDateTime.now())
+    }
 
     private suspend fun initDebouchesData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.DEBOUCHES))) {
             appDataSource.debouches()
-            appStorage.setLastSaved(DataKey.DEBOUCHES, ZonedDateTime.now())
         }
     }
 

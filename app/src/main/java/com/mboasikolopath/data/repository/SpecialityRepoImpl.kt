@@ -28,12 +28,13 @@ class SpecialityRepoImpl(
     private suspend fun initSpecialitiesData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.SPECIALITIES))) {
             appDataSource.specialities()
-            appStorage.setLastSaved(DataKey.SPECIALITIES, ZonedDateTime.now())
         }
     }
 
-    private suspend fun saveSpecialities(specialities: List<Speciality>) =
+    private suspend fun saveSpecialities(specialities: List<Speciality>) {
         specialityDao.insertAll(*specialities.toTypedArray())
+        appStorage.setLastSaved(DataKey.SPECIALITIES, ZonedDateTime.now())
+    }
 
     override suspend fun loadAll(): List<Speciality> = withContext(Dispatchers.IO) {
         initSpecialitiesData()

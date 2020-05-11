@@ -39,7 +39,7 @@ import com.mboasikolopath.data.model.relationships.pairs.*
         SeriesSchoolPair::class,
         SeriesSubjectTaughtPair::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

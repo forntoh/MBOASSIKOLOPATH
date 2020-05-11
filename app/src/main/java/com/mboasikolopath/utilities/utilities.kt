@@ -75,7 +75,7 @@ fun ChipGroup.setupGroup(list: List<String>, titleView: TextView?, listener: Vie
     }
 }
 
-fun isFetchNeeded(lastFetchedTime: ZonedDateTime, minutes: Long = 30): Boolean {
+fun isFetchNeeded(lastFetchedTime: ZonedDateTime, minutes: Long = 60): Boolean {
     val fiveMinutesAgo = ZonedDateTime.now().minusMinutes(minutes)
     return lastFetchedTime.isBefore(fiveMinutesAgo)
 }

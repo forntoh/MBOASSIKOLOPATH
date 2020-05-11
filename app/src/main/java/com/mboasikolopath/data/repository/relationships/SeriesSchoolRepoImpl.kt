@@ -28,13 +28,14 @@ class SeriesSchoolRepoImpl(
         }
     }
 
-    private suspend fun saveSeriesSchools(seriesSchools: List<SeriesSchool>) =
+    private suspend fun saveSeriesSchools(seriesSchools: List<SeriesSchool>) {
         seriesSchoolDao.insertAll(*seriesSchools.toTypedArray())
+        appStorage.setLastSaved(DataKey.SERIES_SCHOOLS, ZonedDateTime.now())
+    }
 
     private suspend fun initSeriesSchoolData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.SERIES_SCHOOLS))) {
             appDataSource.seriesSchools()
-            appStorage.setLastSaved(DataKey.SERIES_SCHOOLS, ZonedDateTime.now())
         }
     }
 

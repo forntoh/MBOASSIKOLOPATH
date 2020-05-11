@@ -25,13 +25,14 @@ class SchoolRepoImpl(
         }
     }
 
-    private suspend fun saveSchools(schools: List<School>) =
+    private suspend fun saveSchools(schools: List<School>) {
         schoolDao.insertAll(*schools.toTypedArray())
+        appStorage.setLastSaved(DataKey.SCHOOLS, ZonedDateTime.now())
+    }
 
     private suspend fun initSchoolsData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.SCHOOLS))) {
             appDataSource.schools()
-            appStorage.setLastSaved(DataKey.SCHOOLS, ZonedDateTime.now())
         }
     }
 

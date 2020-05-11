@@ -6,6 +6,7 @@ import com.mboasikolopath.data.model.User
 import com.mboasikolopath.data.repository.*
 import com.mboasikolopath.data.repository.relationships.*
 import com.mboasikolopath.internal.lazyDeferred
+import kotlinx.coroutines.delay
 
 class SetupViewModel(
     private val locationRepo: LocationRepo,
@@ -52,21 +53,23 @@ class SetupViewModel(
     suspend fun downloadLocations() = locationRepo.initData()
 
     suspend fun populateDatabase() {
-        deboucheRepo.initData()
-        educationRepo.initData()
-        jobRepo.initData()
-        specialityRepo.initData()
-        subjectTaughtRepo.initData()
-        seriesRepo.initData()
-        certificateRepo.initData()
-        schoolRepo.initData()
-        sectionRepo.initData()
-        
-        deboucheSeriesRepo.initData()
-        sectionSpecialityRepo.initData()
-        seriesJobRepo.initData()
+        val time = 2000L; delay(time)
+        educationRepo.initData(); delay(time)
+        specialityRepo.initData(); delay(time)
+        deboucheRepo.initData(); delay(time)
+        jobRepo.initData(); delay(time)
+        subjectTaughtRepo.initData(); delay(time)
+
+        sectionRepo.initData(); delay(time)
+        seriesRepo.initData(); delay(time)
+        certificateRepo.initData(); delay(time)
+        schoolRepo.initData(); delay(time)
+
+        sectionSpecialityRepo.initData(); delay(time)
+        deboucheSeriesRepo.initData(); delay(time)
+        seriesJobRepo.initData(); delay(time)
+        seriesSubjectTaughtRepo.initData(); delay(time)
         seriesSchoolRepo.initData()
-        seriesSubjectTaughtRepo.initData()
     }
 
     suspend fun getUser() = userRepo.getUser()

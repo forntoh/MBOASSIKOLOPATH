@@ -19,13 +19,14 @@ class NewsRepoImpl(private val newsDao: NewsDao, private val appStorage: AppStor
         }
     }
 
-    private suspend fun saveNews(news: List<News>) =
+    private suspend fun saveNews(news: List<News>) {
         newsDao.insertAll(*news.toTypedArray())
+        appStorage.setLastSaved(DataKey.NEWS, ZonedDateTime.now())
+    }
 
     private suspend fun initNewsData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.NEWS), 1L)) {
             appDataSource.news()
-            appStorage.setLastSaved(DataKey.NEWS, ZonedDateTime.now())
         }
     }
 

@@ -25,13 +25,14 @@ class SectionSpecialityRepoImpl(
         }
     }
 
-    private suspend fun saveSectionSpecialities(sectionSpecialities: List<SectionSpeciality>) =
+    private suspend fun saveSectionSpecialities(sectionSpecialities: List<SectionSpeciality>) {
         sectionSpecialityDao.insertAll(*sectionSpecialities.toTypedArray())
+        appStorage.setLastSaved(DataKey.SECTION_SPECIALITIES, ZonedDateTime.now())
+    }
 
     private suspend fun initSectionSpecialityData() {
         if (isFetchNeeded(appStorage.getLastSaved(DataKey.SECTION_SPECIALITIES))) {
             appDataSource.sectionSpecialities()
-            appStorage.setLastSaved(DataKey.SECTION_SPECIALITIES, ZonedDateTime.now())
         }
     }
 
