@@ -2,6 +2,7 @@ package com.mboasikolopath.ui.main.home.explore.schools
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.toLiveData
 import com.mboasikolopath.data.repository.LocationRepo
 import com.mboasikolopath.data.repository.SchoolRepo
 import com.mboasikolopath.internal.lazyDeferred
@@ -15,6 +16,33 @@ class SchoolsViewModel(private val schoolRepo: SchoolRepo, private val locationR
         schoolRepo.scope = viewModelScope
         locationRepo.scope = viewModelScope
     }
+
+    private val schoolsDataSource by lazyDeferred {
+        schoolRepo.loadAllPaged()
+    }
+
+
+    val sss by lazyDeferred {
+        schoolsDataSource.await().toLiveData(25)
+    }
+
+    /*suspend fun getSchoolsLiveData() = withContext(Dispatchers.Default) {
+        val factory: DataSource.Factory<Int, GenericListItem> = schoolRepo.loadAllPaged().map {
+            GenericListItem(
+                it.SchoolID.toString(),
+                it.Name,
+                runBlocking(this.coroutineContext) {
+                    locationRepo.findRegionOfLocality(it.LocaliteID)?.Name
+                }
+            )
+        }
+        Log.d("PAGING", "Factory created")
+
+        val pagedListBuilder: LivePagedListBuilder<Int, GenericListItem> = LivePagedListBuilder(factory, 25)
+        Log.d("PAGING", "Builder created")
+
+        pagedListBuilder.build()
+    }*/
 
     val schools by lazyDeferred {
         schoolRepo.loadAll().map {

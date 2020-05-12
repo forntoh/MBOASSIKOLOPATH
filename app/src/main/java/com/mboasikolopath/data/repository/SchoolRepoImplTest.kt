@@ -1,6 +1,7 @@
 package com.mboasikolopath.data.repository
 
 import android.util.Log
+import androidx.paging.DataSource
 import com.google.gson.Gson
 import com.mboasikolopath.data.model.School
 
@@ -10,6 +11,10 @@ class SchoolRepoImplTest : SchoolRepo() {
 
     override suspend fun searchSchoolByName(query: String) = loadAll().filter {
         it.Name.toLowerCase().matches(Regex(".*${query.toLowerCase()}.+"))
+    }
+
+    override suspend fun loadAllPaged(): DataSource.Factory<Int, School> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun loadAll() = listOf(

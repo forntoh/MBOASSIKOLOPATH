@@ -1,5 +1,6 @@
 package com.mboasikolopath.data.db
 
+import androidx.paging.DataSource
 import androidx.room.*
 import com.mboasikolopath.data.model.School
 
@@ -14,6 +15,9 @@ interface SchoolDao {
 
     @Query("SELECT * FROM School")
     fun loadAll(): List<School>
+
+    @Query("SELECT * FROM School")
+    fun loadAllPaged(): DataSource.Factory<Int, School>
 
     @Query("SELECT * FROM School WHERE SchoolID LIKE :id LIMIT 1")
     fun findBySchoolID(id: Int): School

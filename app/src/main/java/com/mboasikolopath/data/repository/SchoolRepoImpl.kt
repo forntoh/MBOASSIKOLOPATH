@@ -1,5 +1,6 @@
 package com.mboasikolopath.data.repository
 
+import androidx.paging.DataSource
 import com.mboasikolopath.data.db.SchoolDao
 import com.mboasikolopath.data.model.School
 import com.mboasikolopath.data.network.AppDataSource
@@ -39,6 +40,10 @@ class SchoolRepoImpl(
     override suspend fun loadAll() = withContext(Dispatchers.IO) {
         initSchoolsData()
         return@withContext schoolDao.loadAll()
+    }
+
+    override suspend fun loadAllPaged():DataSource.Factory<Int, School> = withContext(Dispatchers.IO) {
+        schoolDao.loadAllPaged()
     }
 
     override suspend fun findBySchoolID(id: Int) = withContext(Dispatchers.IO) {
