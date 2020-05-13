@@ -5,10 +5,9 @@ import com.mboasikolopath.data.model.Education
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
+import com.mboasikolopath.internal.runOnIoThread
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class EducationRepoImpl(
@@ -36,12 +35,12 @@ class EducationRepoImpl(
         }
     }
 
-    override suspend fun loadAll(): List<Education> = withContext(Dispatchers.IO) {
+    override suspend fun loadAll(): List<Education> = runOnIoThread {
         initEducationsData()
-        return@withContext educationDao.loadAll()
+        educationDao.loadAll()
     }
 
-    override suspend fun findByEducationID(id: Int): Education = withContext(Dispatchers.IO) {
-        return@withContext educationDao.findByEducationID(id)
+    override suspend fun findByEducationID(id: Int): Education = runOnIoThread {
+        educationDao.findByEducationID(id)
     }
 }

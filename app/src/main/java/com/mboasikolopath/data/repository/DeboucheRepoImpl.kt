@@ -5,10 +5,9 @@ import com.mboasikolopath.data.model.Debouche
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
+import com.mboasikolopath.internal.runOnIoThread
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class DeboucheRepoImpl(
@@ -36,12 +35,12 @@ class DeboucheRepoImpl(
         }
     }
 
-    override suspend fun loadAll(): List<Debouche> = withContext(Dispatchers.IO) {
+    override suspend fun loadAll(): List<Debouche> = runOnIoThread {
         initDebouchesData()
-        return@withContext deboucheDao.loadAll()
+        deboucheDao.loadAll()
     }
 
-    override suspend fun findByDeboucheID(id: Int): Debouche = withContext(Dispatchers.IO) {
-        return@withContext deboucheDao.findByDeboucheID(id)
+    override suspend fun findByDeboucheID(id: Int): Debouche = runOnIoThread {
+        deboucheDao.findByDeboucheID(id)
     }
 }

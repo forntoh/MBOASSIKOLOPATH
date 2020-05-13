@@ -5,10 +5,9 @@ import com.mboasikolopath.data.model.Speciality
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
+import com.mboasikolopath.internal.runOnIoThread
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class SpecialityRepoImpl(
@@ -36,12 +35,12 @@ class SpecialityRepoImpl(
         appStorage.setLastSaved(DataKey.SPECIALITIES, ZonedDateTime.now())
     }
 
-    override suspend fun loadAll(): List<Speciality> = withContext(Dispatchers.IO) {
+    override suspend fun loadAll(): List<Speciality> = runOnIoThread {
         initSpecialitiesData()
-        return@withContext specialityDao.loadAll()
+        specialityDao.loadAll()
     }
 
-    override suspend fun findBySpecialityID(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext specialityDao.findBySpecialityID(id)
+    override suspend fun findBySpecialityID(id: Int) = runOnIoThread {
+        specialityDao.findBySpecialityID(id)
     }
 }

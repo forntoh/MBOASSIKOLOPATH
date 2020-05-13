@@ -38,10 +38,10 @@ class DeboucheSeriesRepoImpl(
 
     override suspend fun findDeboucheAndSeriesPairs() = withContext(Dispatchers.IO) {
         initDebouchesSeriesData()
-        return@withContext deboucheSeriesDao.findDeboucheAndSeriesPairs()
+        deboucheSeriesDao.findDeboucheAndSeriesPairs()
     }
 
     override suspend fun findDebouchesBySeriesID(id: String, cycle: Int) = withContext(Dispatchers.IO) {
-        return@withContext deboucheSeriesDao.findDebouchesBySeriesID(id, cycle)
+        deboucheSeriesDao.findDebouchesBySeriesID(id, cycle)
     }
 }

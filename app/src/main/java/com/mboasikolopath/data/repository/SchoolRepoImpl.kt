@@ -6,10 +6,9 @@ import com.mboasikolopath.data.model.School
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
+import com.mboasikolopath.internal.runOnIoThread
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class SchoolRepoImpl(
@@ -37,20 +36,20 @@ class SchoolRepoImpl(
         }
     }
 
-    override suspend fun loadAllPaged(): DataSource.Factory<Int, School> = withContext(Dispatchers.IO) {
+    override suspend fun loadAllPaged(): DataSource.Factory<Int, School> = runOnIoThread {
         initSchoolsData()
         schoolDao.loadAllPaged()
     }
 
-    override suspend fun findBySchoolID(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext schoolDao.findBySchoolID(id)
+    override suspend fun findBySchoolID(id: Int) = runOnIoThread {
+        schoolDao.findBySchoolID(id)
     }
 
-    override suspend fun findSchoolsForLocality(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext schoolDao.findSchoolsForLocality(id)
+    override suspend fun findSchoolsForLocality(id: Int) = runOnIoThread {
+        schoolDao.findSchoolsForLocality(id)
     }
 
-    override suspend fun searchSchoolByName(query: String): DataSource.Factory<Int, School> = withContext(Dispatchers.IO) {
-        return@withContext schoolDao.searchSchoolByName("%$query%")
+    override suspend fun searchSchoolByName(query: String): DataSource.Factory<Int, School> = runOnIoThread {
+        schoolDao.searchSchoolByName("%$query%")
     }
 }

@@ -5,10 +5,9 @@ import com.mboasikolopath.data.model.relationships.SeriesSubjectTaught
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
+import com.mboasikolopath.internal.runOnIoThread
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class SeriesSubjectTaughtRepoImpl(
@@ -36,12 +35,12 @@ class SeriesSubjectTaughtRepoImpl(
         }
     }
 
-    override suspend fun findSeriesAndSubjectTaughtPairs() = withContext(Dispatchers.IO) {
+    override suspend fun findSeriesAndSubjectTaughtPairs() = runOnIoThread {
         initSeriesSubjectTaughtData()
-        return@withContext seriesSubjectTaughtDao.findSeriesAndSubjectTaughtPairs()
+        seriesSubjectTaughtDao.findSeriesAndSubjectTaughtPairs()
     }
 
-    override suspend fun findSubjectsTaughtBySeriesID(id: String) = withContext(Dispatchers.IO) {
-        return@withContext seriesSubjectTaughtDao.findSubjectsTaughtBySeriesID(id)
+    override suspend fun findSubjectsTaughtBySeriesID(id: String) = runOnIoThread {
+        seriesSubjectTaughtDao.findSubjectsTaughtBySeriesID(id)
     }
 }

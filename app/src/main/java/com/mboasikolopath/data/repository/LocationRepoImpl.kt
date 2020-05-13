@@ -12,11 +12,9 @@ import com.mboasikolopath.data.model.Region
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
+import com.mboasikolopath.internal.runOnIoThread
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class LocationRepoImpl(
@@ -29,9 +27,9 @@ class LocationRepoImpl(
 ) : LocationRepo() {
 
     override suspend fun initData() {
-        initRegionsData(); delay(5000)
-        initDepartementsData(); delay(5000)
-        initArrondissementsData(); delay(5000)
+        initRegionsData()
+        initDepartementsData()
+        initArrondissementsData()
         initLocalitiesData()
     }
 
@@ -94,58 +92,58 @@ class LocationRepoImpl(
         }
     }
 
-    override suspend fun loadAllLocalites() = withContext(Dispatchers.IO) {
+    override suspend fun loadAllLocalites() = runOnIoThread {
         initLocalitiesData()
-        return@withContext localiteDao.loadAll()
+        localiteDao.loadAll()
     }
 
-    override suspend fun findByLocaliteID(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext localiteDao.findByLocaliteID(id)
+    override suspend fun findByLocaliteID(id: Int) = runOnIoThread {
+        localiteDao.findByLocaliteID(id)
     }
 
-    override suspend fun findLocalitesOfArrondissement(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext localiteDao.findLocalitesOfArrondissement(id)
+    override suspend fun findLocalitesOfArrondissement(id: Int) = runOnIoThread {
+        localiteDao.findLocalitesOfArrondissement(id)
     }
 
-    override suspend fun loadAllArrondissements() = withContext(Dispatchers.IO) {
+    override suspend fun loadAllArrondissements() = runOnIoThread {
         initArrondissementsData()
-        return@withContext arrondissementDao.loadAll()
+        arrondissementDao.loadAll()
     }
 
-    override suspend fun findByArrondissementID(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext arrondissementDao.findByArrondissementID(id)
+    override suspend fun findByArrondissementID(id: Int) = runOnIoThread {
+        arrondissementDao.findByArrondissementID(id)
     }
 
-    override suspend fun findArrondissementsOfDepartement(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext arrondissementDao.findArrondissementsOfDepartement(id)
+    override suspend fun findArrondissementsOfDepartement(id: Int) = runOnIoThread {
+        arrondissementDao.findArrondissementsOfDepartement(id)
     }
 
-    override suspend fun loadAllDepartements() = withContext(Dispatchers.IO) {
+    override suspend fun loadAllDepartements() = runOnIoThread {
         initDepartementsData()
-        return@withContext departementDao.loadAll()
+        departementDao.loadAll()
     }
 
-    override suspend fun findByDepartementID(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext departementDao.findByDepartementID(id)
+    override suspend fun findByDepartementID(id: Int) = runOnIoThread {
+        departementDao.findByDepartementID(id)
     }
 
-    override suspend fun findDepartementsOfRegion(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext departementDao.findDepartementsOfRegion(id)
+    override suspend fun findDepartementsOfRegion(id: Int) = runOnIoThread {
+        departementDao.findDepartementsOfRegion(id)
     }
 
-    override suspend fun loadAllRegions() = withContext(Dispatchers.IO) {
+    override suspend fun loadAllRegions() = runOnIoThread {
         initRegionsData()
-        return@withContext regionDao.loadAll()
+        regionDao.loadAll()
     }
 
-    override suspend fun findByRegionID(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext regionDao.findByRegionID(id)
+    override suspend fun findByRegionID(id: Int) = runOnIoThread {
+        regionDao.findByRegionID(id)
     }
 
-    override suspend fun findRegionOfLocality(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext findByLocaliteID(id)?.ArrondissementID?.let {
-            findByArrondissementID(it).DepartementID
-        }?.let { findByDepartementID(it).RegionID
-        }?.let { findByRegionID(it) }
+    override suspend fun findRegionOfLocality(id: Int) = runOnIoThread {
+        findByLocaliteID(id)?.ArrondissementID?.
+        let { findByArrondissementID(it).DepartementID }?.
+        let { findByDepartementID(it).RegionID }?.
+        let { findByRegionID(it) }
     }
 }

@@ -8,10 +8,9 @@ import com.mboasikolopath.data.model.relationships.pairs.SeriesSchoolPair
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
+import com.mboasikolopath.internal.runOnIoThread
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class SeriesSchoolRepoImpl(
@@ -49,23 +48,23 @@ class SeriesSchoolRepoImpl(
         return data
     }
 
-    override suspend fun getSeriesAndItsSchools(): List<SeriesAndItsSchools> = withContext(Dispatchers.IO) {
+    override suspend fun getSeriesAndItsSchools(): List<SeriesAndItsSchools> = runOnIoThread {
         val data = loadData()
-        return@withContext if (!data.isNullOrEmpty()) SeriesSchool.groupSchools(data)
+        return@runOnIoThread if (!data.isNullOrEmpty()) SeriesSchool.groupSchools(data)
         else emptyList<SeriesAndItsSchools>()
     }
 
-    override suspend fun getSchoolAndItsSeries(): List<SchoolAndItsSeries> = withContext(Dispatchers.IO) {
+    override suspend fun getSchoolAndItsSeries(): List<SchoolAndItsSeries> = runOnIoThread {
         val data = loadData()
-        return@withContext if (!data.isNullOrEmpty()) SeriesSchool.groupSeries(data)
+        return@runOnIoThread if (!data.isNullOrEmpty()) SeriesSchool.groupSeries(data)
         else emptyList<SchoolAndItsSeries>()
     }
 
-    override suspend fun findSchoolsBySeriesID(id: String) = withContext(Dispatchers.IO) {
-        return@withContext seriesSchoolDao.findSchoolsBySeriesID(id)
+    override suspend fun findSchoolsBySeriesID(id: String) = runOnIoThread {
+        seriesSchoolDao.findSchoolsBySeriesID(id)
     }
 
-    override suspend fun findSeriesBySchoolID(id: Int) = withContext(Dispatchers.IO) {
+    override suspend fun findSeriesBySchoolID(id: Int) = runOnIoThread {
         seriesSchoolDao.findSeriesBySchoolID(id)
     }
 }

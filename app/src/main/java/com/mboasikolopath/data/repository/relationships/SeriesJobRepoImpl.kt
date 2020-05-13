@@ -8,10 +8,9 @@ import com.mboasikolopath.data.model.relationships.pairs.SeriesJobPair
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
+import com.mboasikolopath.internal.runOnIoThread
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class SeriesJobRepoImpl(
@@ -49,29 +48,29 @@ class SeriesJobRepoImpl(
         return data
     }
 
-    override suspend fun getSeriesAndItsJobs(): List<SeriesAndItsJobs> = withContext(Dispatchers.IO) {
+    override suspend fun getSeriesAndItsJobs(): List<SeriesAndItsJobs> = runOnIoThread {
         val data = loadData()
-        return@withContext if (!data.isNullOrEmpty()) SeriesJob.groupJobs(data)
+        return@runOnIoThread if (!data.isNullOrEmpty()) SeriesJob.groupJobs(data)
         else emptyList<SeriesAndItsJobs>()
     }
 
-    override suspend fun getJobAndItsSeries(): List<JobsAndItsSeries> = withContext(Dispatchers.IO) {
+    override suspend fun getJobAndItsSeries(): List<JobsAndItsSeries> = runOnIoThread {
         val data = loadData()
-        return@withContext if (!data.isNullOrEmpty()) SeriesJob.groupSeries(data)
+        return@runOnIoThread if (!data.isNullOrEmpty()) SeriesJob.groupSeries(data)
         else emptyList<JobsAndItsSeries>()
     }
 
-    override suspend fun findJobsBySeriesID(id: String) = withContext(Dispatchers.IO) {
+    override suspend fun findJobsBySeriesID(id: String) = runOnIoThread {
         initSeriesJobData()
         val data = seriesJobDao.findJobsBySeriesID(id)
         if (data.isNullOrEmpty()) {
             appStorage.clearLastSaved(DataKey.SERIES_JOBS)
             initSeriesJobData()
         }
-        return@withContext data
+        data
     }
 
-    override suspend fun findSeriesByJobID(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext seriesJobDao.findSeriesByJobID(id)
+    override suspend fun findSeriesByJobID(id: Int) = runOnIoThread {
+        seriesJobDao.findSeriesByJobID(id)
     }
 }
