@@ -1,13 +1,18 @@
 package com.mboasikolopath.ui.main.home.explore.schools
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.toLiveData
+import androidx.paging.DataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.mboasikolopath.data.model.School
 import com.mboasikolopath.data.repository.LocationRepo
 import com.mboasikolopath.data.repository.SchoolRepo
 import com.mboasikolopath.internal.lazyDeferred
 import com.mboasikolopath.internal.view.GenericListItem
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SchoolsViewModel(private val schoolRepo: SchoolRepo, private val locationRepo: LocationRepo) : ViewModel() {
@@ -15,34 +20,20 @@ class SchoolsViewModel(private val schoolRepo: SchoolRepo, private val locationR
     init {
         schoolRepo.scope = viewModelScope
         locationRepo.scope = viewModelScope
-    }
 
-    private val schoolsDataSource by lazyDeferred {
-        schoolRepo.loadAllPaged()
-    }
+        viewModelScope.launch(Dispatchers.IO) {
+            val factory: DataSource.Factory<Int, School> = schoolRepo.loadAllPaged()
 
+            val pagedListBuilder: LivePagedListBuilder<Int, School>  = LivePagedListBuilder(factory, 25)
 
-    val sss by lazyDeferred {
-        schoolsDataSource.await().toLiveData(25)
-    }
+            schoolsLiveData = pagedListBuilder.build()
 
-    /*suspend fun getSchoolsLiveData() = withContext(Dispatchers.Default) {
-        val factory: DataSource.Factory<Int, GenericListItem> = schoolRepo.loadAllPaged().map {
-            GenericListItem(
-                it.SchoolID.toString(),
-                it.Name,
-                runBlocking(this.coroutineContext) {
-                    locationRepo.findRegionOfLocality(it.LocaliteID)?.Name
-                }
-            )
         }
-        Log.d("PAGING", "Factory created")
+    }
 
-        val pagedListBuilder: LivePagedListBuilder<Int, GenericListItem> = LivePagedListBuilder(factory, 25)
-        Log.d("PAGING", "Builder created")
+    lateinit var schoolsLiveData: LiveData<PagedList<School>>
 
-        pagedListBuilder.build()
-    }*/
+    suspend fun getLocality(localityId: Int) = locationRepo.findRegionOfLocality(localityId)?.Name
 
     val schools by lazyDeferred {
         schoolRepo.loadAll().map {
