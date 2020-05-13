@@ -37,12 +37,8 @@ class SchoolRepoImpl(
         }
     }
 
-    override suspend fun loadAll() = withContext(Dispatchers.IO) {
+    override suspend fun loadAllPaged(): DataSource.Factory<Int, School> = withContext(Dispatchers.IO) {
         initSchoolsData()
-        return@withContext schoolDao.loadAll()
-    }
-
-    override suspend fun loadAllPaged():DataSource.Factory<Int, School> = withContext(Dispatchers.IO) {
         schoolDao.loadAllPaged()
     }
 
@@ -54,7 +50,7 @@ class SchoolRepoImpl(
         return@withContext schoolDao.findSchoolsForLocality(id)
     }
 
-    override suspend fun searchSchoolByName(query: String): List<School> = withContext(Dispatchers.IO) {
+    override suspend fun searchSchoolByName(query: String): DataSource.Factory<Int, School> = withContext(Dispatchers.IO) {
         return@withContext schoolDao.searchSchoolByName("%$query%")
     }
 }

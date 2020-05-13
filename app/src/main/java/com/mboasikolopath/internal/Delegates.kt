@@ -9,3 +9,13 @@ fun <T> lazyDeferred(block: suspend CoroutineScope.() -> T): Lazy<Deferred<T>> {
         }
     }
 }
+
+suspend fun <T> runOnUiThread(block: () -> T) {
+    withContext(Dispatchers.Main) {
+        block.invoke()
+    }
+}
+
+suspend fun <T> runOnIoThread(block: suspend () -> T) = withContext(Dispatchers.IO) {
+    return@withContext block.invoke()
+}

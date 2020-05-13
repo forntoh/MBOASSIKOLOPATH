@@ -1,21 +1,25 @@
 package com.mboasikolopath.ui.main.home.explore.schools
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.mboasikolopath.data.model.School
 import com.mboasikolopath.data.repository.LocationRepo
 import com.mboasikolopath.data.repository.SchoolRepo
-import com.mboasikolopath.internal.lazyDeferred
-import com.mboasikolopath.internal.view.GenericListItem
+import com.mboasikolopath.internal.runOnUiThread
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SchoolsViewModel(private val schoolRepo: SchoolRepo, private val locationRepo: LocationRepo) : ViewModel() {
+
+    private val pageListConfig = PagedList.Config.Builder()
+        .setEnablePlaceholders(true)
+        .setInitialLoadSizeHint(15)
+        .setPageSize(30)
+        .build()
+
+    lateinit var lifecycleOwner: LifecycleOwner
 
     init {
         schoolRepo.scope = viewModelScope
@@ -23,35 +27,20 @@ class SchoolsViewModel(private val schoolRepo: SchoolRepo, private val locationR
 
         viewModelScope.launch(Dispatchers.IO) {
             val factory: DataSource.Factory<Int, School> = schoolRepo.loadAllPaged()
-
-            val pagedListBuilder: LivePagedListBuilder<Int, School>  = LivePagedListBuilder(factory, 25)
-
-            schoolsLiveData = pagedListBuilder.build()
-
+            val pagedListBuilder: LivePagedListBuilder<Int, School>  = LivePagedListBuilder(factory, pageListConfig)
+            runOnUiThread { pagedListBuilder.build().observe(lifecycleOwner, Observer { _schoolsLiveData.postValue(it) }) }
         }
     }
 
-    lateinit var schoolsLiveData: LiveData<PagedList<School>>
+    private val _schoolsLiveData = MutableLiveData<PagedList<School>>()
+    val schoolsLiveData: LiveData<PagedList<School>>
+        get() = _schoolsLiveData
 
     suspend fun getLocality(localityId: Int) = locationRepo.findRegionOfLocality(localityId)?.Name
 
-    val schools by lazyDeferred {
-        schoolRepo.loadAll().map {
-            GenericListItem(
-                it.SchoolID.toString(),
-                it.Name,
-                locationRepo.findRegionOfLocality(it.LocaliteID)?.Name
-            )
-        }
-    }
-
-    suspend fun searchSchoolByName(query: String): List<GenericListItem> = withContext(Dispatchers.IO) {
-        return@withContext schoolRepo.searchSchoolByName(query).map {
-            GenericListItem(
-                it.SchoolID.toString(),
-                it.Name,
-                locationRepo.findRegionOfLocality(it.LocaliteID)?.Name
-            )
-        }
+    suspend fun searchSchoolByName(query: String) {
+        val factory: DataSource.Factory<Int, School> = schoolRepo.searchSchoolByName(query)
+        val pagedListBuilder: LivePagedListBuilder<Int, School>  = LivePagedListBuilder(factory, pageListConfig)
+        runOnUiThread { pagedListBuilder.build().observe(lifecycleOwner, Observer { _schoolsLiveData.postValue(it) }) }
     }
 }

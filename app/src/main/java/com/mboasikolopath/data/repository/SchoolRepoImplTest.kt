@@ -1,20 +1,31 @@
 package com.mboasikolopath.data.repository
 
-import android.util.Log
 import androidx.paging.DataSource
-import com.google.gson.Gson
 import com.mboasikolopath.data.model.School
 
 class SchoolRepoImplTest : SchoolRepo() {
 
     override suspend fun initData() = Unit
 
-    override suspend fun searchSchoolByName(query: String) = loadAll().filter {
-        it.Name.toLowerCase().matches(Regex(".*${query.toLowerCase()}.+"))
+    override suspend fun findBySchoolID(id: Int): School {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun findSchoolsForLocality(id: Int): List<School> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun searchSchoolByName(query: String): DataSource.Factory<Int, School> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun loadAllPaged(): DataSource.Factory<Int, School> {
         TODO("Not yet implemented")
+    }
+
+/*
+    override suspend fun searchSchoolByName(query: String) = loadAll().filter {
+        it.Name.toLowerCase().matches(Regex(".*${query.toLowerCase()}.+"))
     }
 
     override suspend fun loadAll() = listOf(
@@ -38,5 +49,5 @@ class SchoolRepoImplTest : SchoolRepo() {
         loadAll().find { it.SchoolID == id }!!
 
     override suspend fun findSchoolsForLocality(id: Int) =
-        loadAll().filter { it.LocaliteID == id }
+        loadAll().filter { it.LocaliteID == id }*/
 }

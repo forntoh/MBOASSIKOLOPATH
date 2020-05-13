@@ -67,6 +67,7 @@ class SectorFragment : ScopedFragment() {
             1 -> {
                 sectorOptions = viewModel.sectorOptions(args.parentId)
                 long_description.visibility = View.VISIBLE
+                if (sectorOptions.isNotEmpty())
                 long_description.text = sectorOptions.first().longDescription
                 mainSection.update(sectorOptions)
                 (activity as MainActivity).setToolbarTitle(args.title)

@@ -1,14 +1,14 @@
 package com.mboasikolopath.data.repository
 
+import androidx.paging.DataSource
 import com.mboasikolopath.data.db.JobDao
 import com.mboasikolopath.data.model.Job
 import com.mboasikolopath.data.network.AppDataSource
 import com.mboasikolopath.data.pref.AppStorage
 import com.mboasikolopath.data.pref.DataKey
+import com.mboasikolopath.internal.runOnIoThread
 import com.mboasikolopath.utilities.isFetchNeeded
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.threeten.bp.ZonedDateTime
 
 class JobRepoImpl(
@@ -36,16 +36,16 @@ class JobRepoImpl(
         }
     }
 
-    override suspend fun loadAll() = withContext(Dispatchers.IO) {
+    override suspend fun loadAllPaged(): DataSource.Factory<Int, Job> = runOnIoThread {
         initJobsData()
-        return@withContext jobDao.loadAll()
+        jobDao.loadAllPaged()
     }
 
-    override suspend fun findByJobID(id: Int) = withContext(Dispatchers.IO) {
-        return@withContext jobDao.findByJobID(id)
+    override suspend fun findByJobID(id: Int) = runOnIoThread {
+        jobDao.findByJobID(id)
     }
 
-    override suspend fun searchJob(query: String) = withContext(Dispatchers.IO) {
-        return@withContext jobDao.searchJob("%$query%")
+    override suspend fun searchJob(query: String) = runOnIoThread {
+        jobDao.searchJob("%$query%")
     }
 }

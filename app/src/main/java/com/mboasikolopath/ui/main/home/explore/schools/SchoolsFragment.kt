@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,16 +15,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mboasikolopath.R
 import com.mboasikolopath.data.model.School
 import com.mboasikolopath.internal.GenericItemPagedListAdapter
-import com.mboasikolopath.internal.view.GenericListItem
+import com.mboasikolopath.internal.OnItemClickListener
 import com.mboasikolopath.ui.base.ScopedFragment
 import com.mboasikolopath.ui.main.MainActivity
 import com.mboasikolopath.utilities.invalidateViewState
 import com.mboasikolopath.utilities.onQueryTextListener
 import com.mboasikolopath.utilities.onSearchViewShown
-import com.mboasikolopath.utilities.toggleViewState
 import com.tripl3dev.prettystates.StatesConstants
 import com.tripl3dev.prettystates.setState
-import com.xwray.groupie.Section
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_schools.*
 import kotlinx.coroutines.launch
@@ -36,9 +33,6 @@ class SchoolsFragment : ScopedFragment() {
     private val viewModelFactory: SchoolsViewModelFactory by instance<SchoolsViewModelFactory>()
 
     private lateinit var viewModel: SchoolsViewModel
-    private lateinit var schools: List<GenericListItem>
-
-    private val schoolsSection = Section()
 
     private val args: SchoolsFragmentArgs by navArgs()
 
@@ -50,6 +44,7 @@ class SchoolsFragment : ScopedFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SchoolsViewModel::class.java)
+        viewModel.lifecycleOwner = viewLifecycleOwner
         buildUI()
     }
 
@@ -59,14 +54,16 @@ class SchoolsFragment : ScopedFragment() {
 
         val schoolsAdapter = GenericItemPagedListAdapter<School>(
             context!!,
-            viewModel.viewModelScope,
-            subtitleListener
-        )
+            this@SchoolsFragment
+        ).apply {
+            subtitleListener = this@SchoolsFragment.subtitleListener
+            onItemClickListener = this@SchoolsFragment.onItemClickListener
+        }
+
         rv_schools.apply {
             adapter = schoolsAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
-        schoolsAdapter.onItemClickListener = onItemClickListener
 
         rv_schools.setState(StatesConstants.LOADING_STATE)
         viewModel.schoolsLiveData.observe(viewLifecycleOwner, Observer { schools ->
@@ -86,21 +83,19 @@ class SchoolsFragment : ScopedFragment() {
 
     private fun setupSearchView() = (activity as MainActivity).searchView.apply {
         onQueryTextListener { search(it) }
-        onSearchViewShown({ setQuery(query, false) }, { schoolsSection.update(schools) })
+        onSearchViewShown({ setQuery(query, false) }, {})
     }
 
     private fun search(text: String) = launch {
         query = text
         rv_schools.invalidateViewState()
-        rv_schools.toggleViewState(schoolsSection.apply { update(viewModel.searchSchoolByName(text)) })
+        viewModel.searchSchoolByName(text)
     }
 
-    private val onItemClickListener = object : GenericItemPagedListAdapter.OnItemClickListener {
-        override fun <T> onItemClick(item: T) {
-            if (item is School) NavHostFragment.findNavController(this@SchoolsFragment).navigate(
-                SchoolsFragmentDirections.actionSchoolsFragmentToSchoolFragment(item.SchoolID)
-            )
-        }
+    private val onItemClickListener =  OnItemClickListener { item ->
+        if (item is School) NavHostFragment.findNavController(this@SchoolsFragment).navigate(
+            SchoolsFragmentDirections.actionSchoolsFragmentToSchoolFragment(item.SchoolID)
+        )
     }
 
 }

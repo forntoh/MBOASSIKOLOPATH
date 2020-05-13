@@ -36,7 +36,7 @@ class SeriesJobRepoImplTest(val jobRepo: JobRepo, val seriesRepo: SeriesRepo) : 
     }
 
     override suspend fun getSeriesAndItsJobs(): List<SeriesAndItsJobs> {
-        val list = mutableListOf<SeriesAndItsJobs>()
+        /*val list = mutableListOf<SeriesAndItsJobs>()
 
         for (i in 0..16) {
 
@@ -52,8 +52,9 @@ class SeriesJobRepoImplTest(val jobRepo: JobRepo, val seriesRepo: SeriesRepo) : 
                 )
             )
         }
-        return list
+        return list*/
+        return emptyList()
     }
 
-    override suspend fun findJobsBySeriesID(id: String) = jobRepo.loadAll()
+    override suspend fun findJobsBySeriesID(id: String) = emptyList<Job>() /*jobRepo.loadAll()*/
 }

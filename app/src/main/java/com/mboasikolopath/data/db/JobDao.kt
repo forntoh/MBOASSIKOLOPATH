@@ -1,23 +1,19 @@
 package com.mboasikolopath.data.db
 
-import androidx.room.*
+import androidx.paging.DataSource
+import androidx.room.Dao
+import androidx.room.Query
 import com.mboasikolopath.data.model.Job
 
 @Dao
-interface JobDao {
+interface JobDao: BaseDao<Job> {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg jobs: Job)
-
-    @Delete
-    fun delete(vararg job: Job)
-
-    @Query("SELECT * FROM Job")
-    fun loadAll(): List<Job>
+    @Query("SELECT * FROM Job LIMIT 100")
+    fun loadAllPaged(): DataSource.Factory<Int, Job>
 
     @Query("SELECT * FROM Job WHERE JobID LIKE :id LIMIT 1")
     fun findByJobID(id: Int): Job
 
-    @Query("SELECT * FROM Job WHERE LOWER(Name) LIKE LOWER(:query)")
-    fun searchJob(query: String): List<Job>
+    @Query("SELECT * FROM Job WHERE LOWER(Name) LIKE LOWER(:query) LIMIT 50")
+    fun searchJob(query: String): DataSource.Factory<Int, Job>
 }

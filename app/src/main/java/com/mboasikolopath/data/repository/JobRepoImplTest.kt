@@ -1,13 +1,12 @@
 package com.mboasikolopath.data.repository
 
-import android.util.Log
-import com.google.gson.Gson
+import androidx.paging.DataSource
 import com.mboasikolopath.data.model.Job
 
 class JobRepoImplTest : JobRepo() {
 
     override suspend fun initData() = Unit
-
+/*
     override suspend fun searchJob(query: String) = loadAll().filter { it.Name.toLowerCase().matches(Regex(".*${query.toLowerCase()}.+")) }
 
     override suspend fun loadAll() = listOf(
@@ -35,5 +34,17 @@ class JobRepoImplTest : JobRepo() {
         Job(10, "Electromecanicien")
     ).apply { Log.d(this[0]::class.java.name, Gson().toJson(this)) }
 
-    override suspend fun findByJobID(id: Int) = loadAll().find { it.JobID == id }!!
+    override suspend fun findByJobID(id: Int) = loadAll().find { it.JobID == id }!!*/
+
+    override suspend fun loadAllPaged(): DataSource.Factory<Int, Job> {
+        TODO("Not yet Implemented")
+    }
+
+    override suspend fun findByJobID(id: Int): Job {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun searchJob(query: String): DataSource.Factory<Int, Job> {
+        TODO("Not yet implemented")
+    }
 }

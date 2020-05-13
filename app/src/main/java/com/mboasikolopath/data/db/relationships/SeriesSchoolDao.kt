@@ -23,6 +23,7 @@ interface SeriesSchoolDao {
         SELECT s.SchoolID, s.Name, s.LocaliteID 
         FROM SeriesSchoolPair as s
         WHERE s.Series_SeriesID = :id
+        LIMIT 10
         """
     )
     fun findSchoolsBySeriesID(id: String): List<School>
@@ -32,6 +33,7 @@ interface SeriesSchoolDao {
         SELECT s.Series_SeriesID as SeriesID, s.Series_Name as Name, s.Series_Cycle as Cycle, s.Series_SpecialityID as SpecialityID
         FROM SeriesSchoolPair as s
         WHERE s.SchoolID = :id
+        LIMIT 20
         """
     )
     fun findSeriesBySchoolID(id: Int): List<Series>
