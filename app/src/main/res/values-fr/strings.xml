@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mboa\'s Sikolo Path</string>
     <string name="action_settings">Paramètres</string>
     <string name="search_hint">Chercher</string>
     <string name="search_hint_jobs">Recherche d\'emplois</string>
