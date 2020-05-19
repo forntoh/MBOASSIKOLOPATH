@@ -12,6 +12,9 @@
             android:id="@+id/rv_jobs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarThumbVertical="@color/colorAccent"
+            android:scrollbars="vertical"
             tools:listitem="@layout/item_list_generic" />
     </FrameLayout>
 </androidx.core.widget.NestedScrollView>

@@ -19,9 +19,7 @@ import com.mboasikolopath.data.model.Series
 import com.mboasikolopath.internal.GenericItemPagedListAdapter
 import com.mboasikolopath.ui.base.ScopedFragment
 import com.mboasikolopath.ui.main.MainActivity
-import com.mboasikolopath.utilities.invalidateViewState
-import com.mboasikolopath.utilities.onQueryTextListener
-import com.mboasikolopath.utilities.onSearchViewShown
+import com.mboasikolopath.utilities.*
 import com.tripl3dev.prettystates.StatesConstants
 import com.tripl3dev.prettystates.setState
 import kotlinx.android.synthetic.main.activity_main.*
@@ -45,7 +43,9 @@ class JobsFragment : ScopedFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(JobsViewModel::class.java)
-        viewModel.lifecycleOwner = viewLifecycleOwner
+        rv_jobs.layoutParams = rv_jobs.layoutParams.apply {
+            height = screenHeight - 48.inPx - activity.getStatusBarHeight()
+        }
         buildUI()
     }
 

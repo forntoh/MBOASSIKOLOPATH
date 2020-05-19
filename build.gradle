@@ -7,9 +7,9 @@ buildscript {
         glide_version = '4.11.0'
         groupie_version = '2.7.0'
         kodein_version = '6.0.1'
-        arch_navigation = '1.0.0'
+        arch_navigation = '2.2.2'
         room_version = '2.2.5'
-        lifecycle_version = '2.2.0'
+        lifecycle_version = '2.2.0-rc03'
         retrofit_version = '2.7.1'
         paging_version = '2.1.2'
         material_dialogs_version = '3.1.1'
@@ -20,7 +20,7 @@ buildscript {
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.2'
+        classpath 'com.android.tools.build:gradle:3.6.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0-alpha06'
         classpath 'com.google.gms:google-services:4.3.3'

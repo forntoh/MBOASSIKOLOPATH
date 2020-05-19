@@ -1,9 +1,12 @@
 package com.mboasikolopath.ui.main.home.explore.jobs
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import androidx.paging.toLiveData
 import com.mboasikolopath.data.model.Job
 import com.mboasikolopath.data.repository.JobRepo
 import com.mboasikolopath.data.repository.SpecialityRepo
@@ -20,13 +23,16 @@ class JobsViewModel(
     private val specialityRepo: SpecialityRepo
 ) : ViewModel() {
 
+    private val pageSize = 15
+
     private val pageListConfig = PagedList.Config.Builder()
-        .setEnablePlaceholders(true)
-        .setInitialLoadSizeHint(15)
-        .setPageSize(30)
+        .setEnablePlaceholders (false)
+        .setPageSize           (pageSize)
+        .setPrefetchDistance   (pageSize * 2)
+        .setInitialLoadSizeHint(pageSize * 3)
+        .setMaxSize            (pageSize * 9)
         .build()
 
-    lateinit var lifecycleOwner: LifecycleOwner
 
     init {
         jobRepo.scope = viewModelScope
@@ -35,8 +41,9 @@ class JobsViewModel(
 
         viewModelScope.launch(Dispatchers.IO) {
             val factory: DataSource.Factory<Int, Job> = jobRepo.loadAllPaged()
-            val pagedListBuilder: LivePagedListBuilder<Int, Job> = LivePagedListBuilder(factory, pageListConfig)
-            runOnUiThread { pagedListBuilder.build().observe(lifecycleOwner, Observer { _jobsLiveData.postValue(it) }) }
+            runOnUiThread {
+                factory.toLiveData(pageListConfig).observeForever { _jobsLiveData.postValue(it) }
+            }
         }
     }
 
@@ -46,8 +53,9 @@ class JobsViewModel(
 
     suspend fun searchJobs(query: String) = runOnIoThread {
         val factory: DataSource.Factory<Int, Job> = jobRepo.searchJob(query)
-        val pagedListBuilder: LivePagedListBuilder<Int, Job>  = LivePagedListBuilder(factory, pageListConfig)
-        runOnUiThread { pagedListBuilder.build().observe(lifecycleOwner, Observer { _jobsLiveData.postValue(it) }) }
+        runOnUiThread {
+            factory.toLiveData(pageListConfig).observeForever { _jobsLiveData.postValue(it) }
+        }
     }
 
     suspend fun getSpecialityOfJob(jobId: Int) = runOnIoThread { seriesJobRepo.findSeriesByJobID(jobId).joinToString {

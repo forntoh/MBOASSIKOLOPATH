@@ -37,6 +37,17 @@ val Int.inSp: Float get() = (this * Resources.getSystem().displayMetrics.scaledD
 
 val screenWidth: Int get() = Resources.getSystem().displayMetrics.widthPixels
 
+val screenHeight: Int get() = Resources.getSystem().displayMetrics.heightPixels
+
+fun Activity?.getStatusBarHeight(): Int {
+    var result = 0
+    val resourceId: Int? = this?.resources?.getIdentifier("status_bar_height", "dimen", "android")
+    if (resourceId != null) {
+        if (resourceId > 0) result = this?.resources?.getDimensionPixelSize(resourceId) ?: 16.inPx
+    }
+    return result
+}
+
 fun Activity.enableWhiteStatusBar() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -75,8 +86,8 @@ fun ChipGroup.setupGroup(list: List<String>, titleView: TextView?, listener: Vie
     }
 }
 
-fun isFetchNeeded(lastFetchedTime: ZonedDateTime, minutes: Long = 180): Boolean {
-    val fiveMinutesAgo = ZonedDateTime.now().minusMinutes(minutes)
+fun isFetchNeeded(lastFetchedTime: ZonedDateTime, days: Long = 1): Boolean {
+    val fiveMinutesAgo = ZonedDateTime.now().minusDays(days)
     return lastFetchedTime.isBefore(fiveMinutesAgo)
 }
 

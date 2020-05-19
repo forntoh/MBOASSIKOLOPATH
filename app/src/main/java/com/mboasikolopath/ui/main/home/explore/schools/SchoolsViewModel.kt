@@ -1,9 +1,12 @@
 package com.mboasikolopath.ui.main.home.explore.schools
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import androidx.paging.toLiveData
 import com.mboasikolopath.data.model.School
 import com.mboasikolopath.data.repository.LocationRepo
 import com.mboasikolopath.data.repository.SchoolRepo
@@ -13,13 +16,15 @@ import kotlinx.coroutines.launch
 
 class SchoolsViewModel(private val schoolRepo: SchoolRepo, private val locationRepo: LocationRepo) : ViewModel() {
 
-    private val pageListConfig = PagedList.Config.Builder()
-        .setEnablePlaceholders(true)
-        .setInitialLoadSizeHint(15)
-        .setPageSize(30)
-        .build()
+    private val pageSize = 15
 
-    lateinit var lifecycleOwner: LifecycleOwner
+    private val pageListConfig = PagedList.Config.Builder()
+        .setEnablePlaceholders (false)
+        .setPageSize           (pageSize)
+        .setPrefetchDistance   (pageSize)
+        .setInitialLoadSizeHint(pageSize * 2)
+        .setMaxSize            (pageSize * 8)
+        .build()
 
     init {
         schoolRepo.scope = viewModelScope
@@ -27,8 +32,11 @@ class SchoolsViewModel(private val schoolRepo: SchoolRepo, private val locationR
 
         viewModelScope.launch(Dispatchers.IO) {
             val factory: DataSource.Factory<Int, School> = schoolRepo.loadAllPaged()
-            val pagedListBuilder: LivePagedListBuilder<Int, School>  = LivePagedListBuilder(factory, pageListConfig)
-            runOnUiThread { pagedListBuilder.build().observe(lifecycleOwner, Observer { _schoolsLiveData.postValue(it) }) }
+            runOnUiThread {
+                factory.toLiveData(pageListConfig).observeForever {
+                    _schoolsLiveData.postValue(it)
+                }
+            }
         }
     }
 
@@ -40,7 +48,10 @@ class SchoolsViewModel(private val schoolRepo: SchoolRepo, private val locationR
 
     suspend fun searchSchoolByName(query: String) {
         val factory: DataSource.Factory<Int, School> = schoolRepo.searchSchoolByName(query)
-        val pagedListBuilder: LivePagedListBuilder<Int, School>  = LivePagedListBuilder(factory, pageListConfig)
-        runOnUiThread { pagedListBuilder.build().observe(lifecycleOwner, Observer { _schoolsLiveData.postValue(it) }) }
+        runOnUiThread {
+            factory.toLiveData(pageListConfig).observeForever {
+                _schoolsLiveData.postValue(it)
+            }
+        }
     }
 }

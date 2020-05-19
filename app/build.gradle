@@ -76,8 +76,8 @@ dependencies {
     implementation "com.xwray:groupie-kotlin-android-extensions:$groupie_version"
 
     // Navigation Library
-    implementation "android.arch.navigation:navigation-fragment-ktx:$arch_navigation"
-    implementation "android.arch.navigation:navigation-ui-ktx:$arch_navigation"
+    implementation "androidx.navigation:navigation-fragment-ktx:$arch_navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$arch_navigation"
 
     // Paging Library
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"

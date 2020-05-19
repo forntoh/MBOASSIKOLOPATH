@@ -87,7 +87,7 @@ interface ApiService {
 
     companion object {
 
-        private const val BASE_URL = "http://mboasikolopath.herokuapp.com/public/api/"
+        private const val BASE_URL = "http://mboasikulu.com/public/api/"
 
         operator fun invoke(connectivityInterceptor: ConnectivityInterceptor, appStorage: AppStorage): ApiService {
             val requestInterceptor = Interceptor { chain ->
