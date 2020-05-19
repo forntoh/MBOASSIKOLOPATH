@@ -14,11 +14,12 @@ android {
         applicationId "com.mboasikolopath"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "v0.1.0-alpha01"
+        versionCode 2
+        versionName "v1.0.0-alpha02"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", "mboa-sikulu-$versionName")
     }
     buildTypes {
         release {
