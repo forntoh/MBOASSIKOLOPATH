@@ -20,6 +20,7 @@ import com.mboasikolopath.ui.main.MainFragmentDirections
 import com.mboasikolopath.ui.main.home.explore.news.NewsViewModel
 import com.mboasikolopath.ui.main.home.explore.news.NewsViewModelFactory
 import com.mboasikolopath.utilities.InsetDecoration
+import com.mboasikolopath.utilities.getLoadingDialog
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.OnItemClickListener
@@ -37,6 +38,8 @@ class HomeFragment : ScopedFragment(), View.OnClickListener {
     private val setupViewModelFactory: SetupViewModelFactory by instance<SetupViewModelFactory>()
 
     private val newsSection = Section()
+
+    private val dialog by lazy { getLoadingDialog(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +74,11 @@ class HomeFragment : ScopedFragment(), View.OnClickListener {
         button_after_primary.setOnClickListener(this@HomeFragment)
         button_after_secondary.setOnClickListener(this@HomeFragment)
         //button_after_high.setOnClickListener(this@HomeFragment)
+
+        viewModelSetup.dbPopulated.observeForever {
+            if (it) dialog.dismiss()
+            else dialog.show()
+        }
     }
 
     override fun onClick(v: View?) {

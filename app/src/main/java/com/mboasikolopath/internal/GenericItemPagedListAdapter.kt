@@ -66,6 +66,7 @@ class GenericItemPagedListAdapter<T : Any>(
         )
 
     override fun onBindViewHolder(holder: GenericItemViewHolder, position: Int) {
+        holder.toExpand = false
         val item = getItem(position)
         if (item == null) holder.clear()
         else holder.bind(item)

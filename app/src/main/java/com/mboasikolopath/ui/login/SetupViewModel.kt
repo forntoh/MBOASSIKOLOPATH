@@ -1,5 +1,7 @@
 package com.mboasikolopath.ui.login
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mboasikolopath.data.model.User
@@ -51,7 +53,12 @@ class SetupViewModel(
 
     suspend fun downloadLocations() = locationRepo.initData()
 
+    private val _isDbPopulated = MutableLiveData<Boolean>()
+    val dbPopulated: LiveData<Boolean>
+        get() = _isDbPopulated
+
     suspend fun populateDatabase() {
+        _isDbPopulated.postValue(false)
         educationRepo.initData()
         specialityRepo.initData()
         deboucheRepo.initData()
@@ -68,6 +75,7 @@ class SetupViewModel(
         seriesJobRepo.initData()
         seriesSubjectTaughtRepo.initData()
         seriesSchoolRepo.initData()
+        _isDbPopulated.postValue(true)
     }
 
     suspend fun getUser() = userRepo.getUser()

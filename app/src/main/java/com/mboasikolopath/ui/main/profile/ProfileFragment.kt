@@ -50,7 +50,7 @@ class ProfileFragment : ScopedFragment(), KodeinAware {
                 "google.com" -> tv_sign_in_method.text = getString(R.string.signed_in_with_google)
             }
             userInfo.photoUrl?.let {
-                Glide.with(context!!).load(it).into(photoIv)
+                Glide.with(requireContext()).load(it).into(photoIv)
             }
         }
 

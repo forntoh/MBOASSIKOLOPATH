@@ -22,7 +22,7 @@ data class NewsItem(
         }
         viewHolder.itemView.news_title.layoutParams.width = (screenWidth * (2f / 4f)).toInt()
         viewHolder.itemView.news_title.text = title
-        Glide.with(viewHolder.itemView.context).load(thumbnail).into(viewHolder.itemView.news_thumbnail)
+        Glide.with(viewHolder.itemView.context).load(thumbnail).placeholder(R.drawable.welcome_image).into(viewHolder.itemView.news_thumbnail)
     }
 
     override fun getLayout() = R.layout.item_news

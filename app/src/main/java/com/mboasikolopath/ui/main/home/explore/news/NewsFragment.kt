@@ -35,7 +35,7 @@ class NewsFragment : ScopedFragment() {
         val news = newsViewModel.findNewsByID(args.newsId)
         news_title.text = news.Title
         news_description.text = news.Body
-        Glide.with(this@NewsFragment).load(news.Thumbnail).into(news_image)
+        Glide.with(this@NewsFragment).load(news.Thumbnail).placeholder(R.drawable.welcome_image).into(news_image)
     }
 
 }

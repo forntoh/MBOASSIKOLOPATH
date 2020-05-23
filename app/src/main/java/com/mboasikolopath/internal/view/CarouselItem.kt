@@ -9,7 +9,7 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 data class CarouselItem(var thumbnailUrl: String) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        Glide.with(viewHolder.itemView.context).load(thumbnailUrl).into(viewHolder.itemView as RoundedImageView)
+        Glide.with(viewHolder.itemView.context).load(thumbnailUrl).placeholder(R.drawable.welcome_image).into(viewHolder.itemView as RoundedImageView)
     }
 
     override fun getLayout() = R.layout.item_carousel
