@@ -69,7 +69,7 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
     }
 
     private lateinit var viewModel: SetupViewModel
-    private val viewModelFactory: SetupViewModelFactory by instance()
+    private val viewModelFactory: SetupViewModelFactory by instance<SetupViewModelFactory>()
 
     private val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
 
@@ -242,17 +242,12 @@ class SetupActivity : AppIntro2(), KodeinAware, CoroutineScope {
             ContextCompat.getDrawable(this, R.drawable.ic_appintro_navigate_next_white)!!.apply {
                 mutate().setColorFilter(primaryColor, PorterDuff.Mode.SRC_IN)
             }
-        val backDrawable =
-            ContextCompat.getDrawable(this, R.drawable.ic_appintro_navigate_before_white)!!.apply {
-                mutate().setColorFilter(primaryColor, PorterDuff.Mode.SRC_IN)
-            }
         val doneDrawable =
             ContextCompat.getDrawable(this, R.drawable.ic_appintro_done_white)!!.apply {
                 mutate().setColorFilter(primaryColor, PorterDuff.Mode.SRC_IN)
             }
 
         (nextButton as ImageButton).setImageDrawable(nextDrawable)
-        (backButton as ImageButton).setImageDrawable(backDrawable)
         (doneButton as ImageButton).setImageDrawable(doneDrawable)
 
         backgroundFrame.setBackgroundColor(Color.WHITE)

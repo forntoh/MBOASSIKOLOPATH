@@ -20,7 +20,7 @@ interface SeriesSchoolDao {
 
     @Query(
         """
-        SELECT s.SchoolID, s.Name, s.LocaliteID 
+        SELECT *
         FROM SeriesSchoolPair as s
         WHERE s.Series_SeriesID = :id
         LIMIT 10

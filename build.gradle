@@ -9,7 +9,7 @@ buildscript {
         kodein_version = '6.0.1'
         arch_navigation = '2.2.2'
         room_version = '2.2.5'
-        lifecycle_version = '2.2.0-rc03'
+        lifecycle_version = '2.2.0'
         retrofit_version = '2.7.1'
         paging_version = '2.1.2'
         material_dialogs_version = '3.1.1'

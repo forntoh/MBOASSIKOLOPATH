@@ -94,7 +94,7 @@ class SeriesFragment : ScopedFragment() {
 
         // Load jobs and sectors****************************************************************************************
         jobs_chip_group.setupGroup(viewModel.jobs.await(), null, null)
-        viewModel.debouches.await()?.let { sectors_chip_group.setupGroup(it, null, null) }
+        viewModel.debouches.await().let { sectors_chip_group.setupGroup(it, null, null) }
     }
 
 }

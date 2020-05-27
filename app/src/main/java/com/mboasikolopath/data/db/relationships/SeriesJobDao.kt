@@ -20,7 +20,7 @@ interface SeriesJobDao {
 
     @Query(
         """
-        SELECT s.JobID, s.Name
+        SELECT *
         FROM SeriesJobPair as s
         WHERE s.Series_SeriesID = :id
          """

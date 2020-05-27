@@ -19,7 +19,7 @@ interface SeriesSubjectTaughtDao {
 
     @Query(
         """
-        SELECT s.SubjectTaughtID, s.Name 
+        SELECT * 
         FROM SeriesSubjectTaughtPair as s
         WHERE s.Series_SeriesID = :id
         """
