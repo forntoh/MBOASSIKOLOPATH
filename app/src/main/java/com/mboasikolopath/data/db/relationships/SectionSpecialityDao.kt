@@ -19,7 +19,7 @@ interface SectionSpecialityDao {
 
     @Query(
         """
-        SELECT s.SpecialityID, s.Description
+        SELECT *
         FROM SectionSpecialityPair as s
         WHERE s.Section_SectionID = :id
         """
