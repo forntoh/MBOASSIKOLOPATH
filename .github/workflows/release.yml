@@ -59,7 +59,6 @@ jobs:
         with:
           name: mboa_${{ env.RELEASE_VERSION }}
           path: ${{ env.SIGNED_RELEASE_FILE }}
-          allow_override: true
 
       - name: Upload tha APK to the Release on Github
         uses: meeDamian/github-release@2.0
@@ -67,6 +66,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.RELEASE_VERSION }}
           files: ${{ env.SIGNED_RELEASE_FILE }}
+          allow_override: true
 
       # Push version.properties file changes
 
