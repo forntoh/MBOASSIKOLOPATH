@@ -15,16 +15,20 @@
       },
       "oauth_client": [
         {
+          "client_id": "819196506744-tas4k0u2prnro1hegnmr815b3q843u6v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mboasikolopath",
+            "certificate_hash": "e83981cfc2285995b3595d1b356f5e8f2a289b55"
+          }
+        },
+        {
           "client_id": "819196506744-403q8qef3o73g5h99p51safea792qckl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mboasikolopath",
             "certificate_hash": "4d7a940fc766809a77f22a4f30d6656d740bfa6b"
           }
-        },
-        {
-          "client_id": "819196506744-4oor9uasv24ujkqbl67fspqqa439cuji.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [

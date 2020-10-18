@@ -8,14 +8,17 @@ apply plugin: "kotlin-kapt"
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+Properties versionProps = new Properties()
+versionProps.load(new FileInputStream(file('version.properties')))
+
 android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "com.mboasikolopath"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 3
-        versionName "v1.0.0-alpha03"
+        versionCode versionProps['VERSION_CODE'].toInteger()
+        versionName versionProps['VERSION_NAME']
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
