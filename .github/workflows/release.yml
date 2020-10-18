@@ -59,6 +59,7 @@ jobs:
         with:
           name: yakka_${{ env.RELEASE_VERSION }}
           path: ${{ env.SIGNED_RELEASE_FILE }}
+          allow_override: true
 
       - name: Upload tha APK to the Release on Github
         uses: meeDamian/github-release@2.0

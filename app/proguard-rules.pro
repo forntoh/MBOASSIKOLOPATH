@@ -32,3 +32,5 @@
       public *;
     }
 ##------------ Begin: Proguard for Glide ------------
+
+-keep class com.mboasikolopath.data.model.*
