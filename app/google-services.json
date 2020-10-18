@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "819196506744-atd318f6sa1grujoof8hgvab7i57vn3l.apps.googleusercontent.com",
+          "client_id": "819196506744-403q8qef3o73g5h99p51safea792qckl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mboasikolopath",
-            "certificate_hash": "b895d6c30affee316d8bef5633dfa518acb7bf68"
+            "certificate_hash": "4d7a940fc766809a77f22a4f30d6656d740bfa6b"
           }
         },
         {
@@ -36,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "819196506744-4oor9uasv24ujkqbl67fspqqa439cuji.apps.googleusercontent.com",
+              "client_id": "819196506744-63d7mf9a4ffok53r4r2rdjr6hao77l1j.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

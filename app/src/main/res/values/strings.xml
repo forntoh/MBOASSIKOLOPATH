@@ -6,7 +6,7 @@
 
     <string name="facebook_app_id" translatable="false">426953727866155</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb426953727866155</string>
-    <string name="web_client_id" translatable="false">819196506744-4oor9uasv24ujkqbl67fspqqa439cuji.apps.googleusercontent.com</string>
+    <string name="web_client_id" translatable="false">819196506744-63d7mf9a4ffok53r4r2rdjr6hao77l1j.apps.googleusercontent.com</string>
 
     <string name="search_hint">Search</string>
     <string name="search_hint_jobs">Search jobs</string>
